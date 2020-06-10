@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(FishDataCollection))]
-public class SimpleDataCollectionInspector : Editor
+public class FishDataCollectionInspector : Editor
 {
     #region On Inspector GUI
     public override void OnInspectorGUI()
