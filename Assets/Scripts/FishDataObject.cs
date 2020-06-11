@@ -14,13 +14,13 @@ public class FishDataObject : ScriptableObject
 	//private int _coolIntField = 0;
 	#endregion Properties (end)
 	public List<BodyOfWaterType> BodyOfWaterType = new List<BodyOfWaterType>();
-/*	List<TimeOfDay>
-public List<ToolRequired> ToolRequired		= new List<ToolRequired>;
-public List<CastingRange> CastingRange		= new List<CastingRange>;
-public List<Attractant> Attractant			= new List<Attractant>;
-public List<EnticeMethod> EnticeMethod		= new List<EnticeMethod>;
-	public List<RetrievalMethod> RetrievalMethod = new List<RetrievalMethod>;
-	*/
+		List<TimeOfDay> TimeOfDay = new List<TimeOfDay>();
+	public List<ToolRequired>ToolRequired		= new List<ToolRequired>();
+public List<CastingRange> CastingRange		= new List<CastingRange>();
+public List<Attractant> Attractant			= new List<Attractant>();
+public List<EnticeMethod> EnticeMethod		= new List<EnticeMethod>();
+	public List<RetrievalMethod> RetrievalMethod = new List<RetrievalMethod>();
+	
 
 
 	#region Initialization	
