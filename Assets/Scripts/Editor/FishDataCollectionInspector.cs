@@ -21,7 +21,7 @@ public class FishDataCollectionInspector : Editor
             List<FishDataObject> assetsInProject = new List<FishDataObject>();
 
             // Get guids for assets that match the given type:
-            string[] guids = AssetDatabase.FindAssets("t:SimpleDataObject");
+            string[] guids = AssetDatabase.FindAssets("t:FishDataObject");
 
             for (int i = 0; i < guids.Length; i++)
             {
