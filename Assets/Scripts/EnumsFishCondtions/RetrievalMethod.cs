@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RetrievalMethod : MonoBehaviour
+[CreateAssetMenu(fileName = "New RetrievalMethod", menuName = "Retrieval Method")]
+public class RetrievalMethod : ScriptableObject
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [System.Serializable]
+    public enum retrievalMethod
+    { Instant, Constant, On,Off }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public retrievalMethod instanceOfEnum;
+
+
 }

@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ToolRequired : MonoBehaviour
+[CreateAssetMenu(fileName = "New ToolRequired", menuName = "Tool Required")]
+public class ToolRequired : ScriptableObject
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [System.Serializable]
+    public enum toolRequired
+    { None, Any, Rod, Spear }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public toolRequired instanceOfEnum;
+
+
 }

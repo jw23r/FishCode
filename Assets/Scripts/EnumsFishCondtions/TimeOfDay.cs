@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TimeOfDay : MonoBehaviour
+[CreateAssetMenu(fileName = "New TimeOfDay", menuName = "Time Of Day")]
+public class TimeOfDay : ScriptableObject
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [System.Serializable]
+    public enum timeOfDay
+    { None, Any, Morning, Day, Evening, Night }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public timeOfDay instanceOfEnum;
+
+
 }
+

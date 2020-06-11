@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[CreateAssetMenu(fileName = "New Attractant", menuName = "Attractant ")]
 public class Attractant : ScriptableObject
 {
     // Start is called before the first frame update

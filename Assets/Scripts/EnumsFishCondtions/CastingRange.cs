@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CastingRange : MonoBehaviour
+[CreateAssetMenu(fileName = "New CastingRange", menuName = "Casting Range ")]
+public class CastingRange : ScriptableObject
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [System.Serializable]
+    public enum castingRange
+    { Close, Far }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public castingRange instanceOfEnum;
+
+
 }
