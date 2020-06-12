@@ -89,14 +89,30 @@ public class Fishing : MonoBehaviour
         string[] enumRetrivalMethodOptions = Enum.GetNames(typeof(currentRetrivalMethdod));
         List<string> currentRetrivalMethdodDDOptions = new List<string>(enumRetrivalMethodOptions);
         RetrivalMethodOptions.AddOptions(currentRetrivalMethdodDDOptions);
+
         // sets casting range methdod
         string[] enumCastingRangeOptions = Enum.GetNames(typeof(currentCastingRange));
         List<string> enumCastingRangeDDOptions = new List<string>(enumCastingRangeOptions);
-        RetrivalMethodOptions.AddOptions(enumCastingRangeDDOptions);
-        //sets time of day
-        string[] enumCastingRangeOptions = Enum.GetNames(typeof(currentCastingRangeOptions));
-        List<string> enumCastingRangeDDOptions = new List<string>(enumCastingRangeOptions);
-        RetrivalMethodOptions.AddOptions(enumCastingRangeDDOptions);
+        CastingRangeOptions.AddOptions(enumCastingRangeDDOptions);
 
+        //sets time of day
+        string[] enumCurrentTimeOfDay = Enum.GetNames(typeof(currentTimeOfDay));
+        List<string> enumCurrentTimeOfDayDDOptions = new List<string>(enumCurrentTimeOfDay);
+        TimeOfDayOptions.AddOptions(enumCurrentTimeOfDayDDOptions);
+
+        //sets type of water
+        string[] enumcurrentBodyOfWaterType = Enum.GetNames(typeof(currentBodyOfWaterType));
+        List<string> enumcurrentBodyOfWaterTypeDDOptions = new List<string>(enumcurrentBodyOfWaterType);
+        BodyOfWaterTypeOptions.AddOptions(enumcurrentBodyOfWaterTypeDDOptions);
+
+        //sets entice required
+        string[] enumcurrententiceMethdod = Enum.GetNames(typeof(currententiceMethdod));
+        List<string> enumenumcurrententiceMethdodDDOptions = new List<string>(enumcurrententiceMethdod);
+        enticeMethdodOptions.AddOptions(enumenumcurrententiceMethdodDDOptions);
+
+        //setsentice methdod
+        string[] enumcurrentToolRequiredOptions = Enum.GetNames(typeof(currentToolRequiredOptions));
+        List<string> enumcurrentToolRequireddDDOptions = new List<string>(enumcurrentToolRequiredOptions);
+        toolRequiredOptions.AddOptions(enumcurrentToolRequireddDDOptions);
     }
 }
