@@ -10,8 +10,19 @@ public class Fishing : MonoBehaviour
     public FishDataCollection fish;
     List <FishDataObject> catchable = new List<FishDataObject>();
     string fishDataCollectionAttraction;
+    
+    //curreent fishing methdos
     string currentFishAttraction;
+    string currentFishRetrivalMethdod;
+    string currentFishCastingRange;
+    string currentFishTimeOfDay;
+    string currentFishBodyOfWaterType;
+    string currentFishToolRequired;
+    string currentFishEnticeMethdod;
 
+
+
+    //dropdown menus
     public Dropdown attractantOptions;
     public Dropdown RetrivalMethodOptions;
     public Dropdown CastingRangeOptions;
@@ -31,9 +42,9 @@ public class Fishing : MonoBehaviour
     enum currentTimeOfDay
     { Morning, Day, Evening, Night }
     enum currentBodyOfWaterType
-    { Morning, Day, Evening, Night }
+    { Ocean, Lake, Pond, Stream }
     enum currentToolRequiredOptions
-    { None, Any, Rod, Spear }
+    {  Rod, Spear }
     enum currententiceMethdod
     {
         Rhythmic, Random, Predictive
@@ -64,6 +75,7 @@ public class Fishing : MonoBehaviour
 
         print((currentAttractant)attractantOptions.value);
         */
+        SetCurrentFishingMethdod();
     }
 
     private void SetCurrentFishingMethdod()
@@ -76,6 +88,132 @@ public class Fishing : MonoBehaviour
         {
             currentFishAttraction = currentAttractant.Living.ToString();
         }
+        //sets retrival methdod
+        if (currentRetrivalMethdod.Constant == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+        {
+
+
+            currentFishRetrivalMethdod = currentRetrivalMethdod.Constant.ToString();
+        }
+        if (currentRetrivalMethdod.Instant == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+        {
+
+
+            currentFishRetrivalMethdod = currentRetrivalMethdod.Instant.ToString();
+        }
+        if (currentRetrivalMethdod.Off == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+        {
+
+
+            currentFishRetrivalMethdod = currentRetrivalMethdod.Off.ToString();
+        }
+        if (currentRetrivalMethdod.On == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+        {
+
+
+            currentFishRetrivalMethdod = currentRetrivalMethdod.On.ToString();
+        }
+        //sets how far to cast
+        if (currentCastingRange.Close == (currentCastingRange)CastingRangeOptions.value)
+        {
+
+
+            currentFishCastingRange = currentRetrivalMethdod.Constant.ToString();
+        }
+        if (currentCastingRange.Far == (currentCastingRange)CastingRangeOptions.value)
+        {
+
+
+            currentFishCastingRange = currentRetrivalMethdod.Constant.ToString();
+        }
+        /// sets string for time of day
+        if (currentTimeOfDay.Day == (currentTimeOfDay)TimeOfDayOptions.value)
+        {
+
+
+            currentFishTimeOfDay = currentTimeOfDay.Day.ToString();
+        }
+        if (currentTimeOfDay.Evening == (currentTimeOfDay)TimeOfDayOptions.value)
+        {
+
+
+            currentFishTimeOfDay = currentTimeOfDay.Evening.ToString();
+        }
+           if (currentTimeOfDay.Morning == (currentTimeOfDay)TimeOfDayOptions.value)
+        {
+
+
+            currentFishTimeOfDay = currentTimeOfDay.Morning.ToString();
+        }
+         
+        if (currentTimeOfDay.Night == (currentTimeOfDay)TimeOfDayOptions.value)
+        {
+
+
+            currentFishTimeOfDay = currentTimeOfDay.Night.ToString();
+        }
+        //sets body of water type
+        if (currentBodyOfWaterType.Ocean == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+        {
+
+
+            currentFishBodyOfWaterType = currentBodyOfWaterType.Ocean.ToString();
+        }
+        if (currentBodyOfWaterType.Lake == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+        {
+
+
+            currentFishBodyOfWaterType = currentBodyOfWaterType.Lake.ToString();
+        }
+        if (currentBodyOfWaterType.Pond == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+        {
+
+
+            currentFishBodyOfWaterType = currentBodyOfWaterType.Pond.ToString();
+        }
+        if (currentBodyOfWaterType.Stream == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+        {
+
+
+            currentFishBodyOfWaterType = currentBodyOfWaterType.Stream.ToString();
+        }  
+        //sets string for tool
+        if (currentToolRequiredOptions.Rod == (currentToolRequiredOptions)toolRequiredOptions.value)
+        {
+
+
+            currentFishToolRequired = currentToolRequiredOptions.Rod.ToString();
+        }
+        if (currentToolRequiredOptions.Spear == (currentToolRequiredOptions)toolRequiredOptions.value)
+        {
+
+
+            currentFishToolRequired = currentToolRequiredOptions.Spear.ToString();
+        }
+        // sets string for entice
+        if (currententiceMethdod.Predictive == (currententiceMethdod)enticeMethdodOptions.value)
+        {
+
+
+            currentFishEnticeMethdod = currententiceMethdod.Predictive.ToString();
+        }
+
+
+        if (currententiceMethdod.Random == (currententiceMethdod)enticeMethdodOptions.value)
+        {
+
+
+            currentFishEnticeMethdod = currententiceMethdod.Random.ToString();
+        }
+        if (currententiceMethdod.Rhythmic == (currententiceMethdod)enticeMethdodOptions.value)
+        {
+
+
+            currentFishEnticeMethdod = currententiceMethdod.Rhythmic.ToString();
+        }
+
+
+
     }
 
     void DropDownOptions()
