@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e3121581f70d14386f2e494d489015, type: 3}
-  m_Name: New BodyOfWwaterType 1
+  m_Script: {fileID: 11500000, guid: d890029ae6da23148bf362f206272c96, type: 3}
+  m_Name: OceanFishDataCollection
   m_EditorClassIdentifier: 
-  instanceOfEnum: 5
+  _fishDataObjects:
+  - {fileID: 11400000, guid: 1a5b45cc708000145b16dfe7eec86994, type: 2}
+  - {fileID: 11400000, guid: cde09c775212ec04994b3115d2db8948, type: 2}
+  - {fileID: 0}

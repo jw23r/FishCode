@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3847a56b33b847346b023bee1ac64769, type: 3}
-  m_Name: Shark FishDataObject
+  m_Name: StingRay FishDataObject
   m_EditorClassIdentifier: 
-  _fishNameTextField: Shark
-  BodyOfWaterType:
-  - {fileID: 11400000, guid: 9dbde20103d1a80478b83131de23d8aa, type: 2}
-  - {fileID: 11400000, guid: abe588117bd409442923a7fc772cca93, type: 2}
+  _fishNameTextField: 
+  BodyOfWaterType: []
   ToolRequired: []
   CastingRange: []
   Attractant: []
