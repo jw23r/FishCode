@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnticeMethod : MonoBehaviour
+[CreateAssetMenu(fileName = "New EnticeMethod", menuName = "Entice Method ")]
+public class EnticeMethod : ScriptableObject
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [System.Serializable]
+    public enum enticeMethod
+    { None, Any, Rhythmic, Random, Predictive }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public enticeMethod instanceOfEnum;
+
 }
