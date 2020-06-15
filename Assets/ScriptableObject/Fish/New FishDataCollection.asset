@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: New FishDataCollection
   m_EditorClassIdentifier: 
   _fishDataObjects:
+  - {fileID: 11400000, guid: fb8a0b05bbc9984409cbef3896c3a880, type: 2}
   - {fileID: 11400000, guid: 1a5b45cc708000145b16dfe7eec86994, type: 2}
+  - {fileID: 11400000, guid: cde09c775212ec04994b3115d2db8948, type: 2}

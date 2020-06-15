@@ -140,7 +140,7 @@ public class Fishing : MonoBehaviour
                                         //    print("8");
                                             catchable.Add(fish.FishDataObjects[i]);
                                             //  print(catchable[0].FishNameTextField);
-                                            print(i);
+                                           // print(i);
                                             if (i >= fish.FishDataObjects.Count - 1)
                                             {
                                                 fishCaught = Random.Range(0, i + 1);

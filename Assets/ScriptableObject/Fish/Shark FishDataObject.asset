@@ -15,7 +15,6 @@ MonoBehaviour:
   _fishNameTextField: Shark
   BodyOfWaterType:
   - {fileID: 11400000, guid: 8c40e4c909bfa6b4d89b681ab3db0aa1, type: 2}
-  - {fileID: 11400000, guid: abe588117bd409442923a7fc772cca93, type: 2}
   TimeOfDay:
   - {fileID: 11400000, guid: 92426a9484ef3c04ebb40b2d84e7da41, type: 2}
   ToolRequired:

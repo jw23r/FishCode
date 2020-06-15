@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434db666e2fbd044499dcb1f622cc813, type: 3}
   m_Name: spear ToolRequired
   m_EditorClassIdentifier: 
-  instanceOfEnum: 0
+  instanceOfEnum: 3

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad022d49c01b8a478078fae0059c698, type: 3}
   m_Name: EnticeMethod
   m_EditorClassIdentifier: 
-  instanceOfEnum: 0
+  instanceOfEnum: 1
