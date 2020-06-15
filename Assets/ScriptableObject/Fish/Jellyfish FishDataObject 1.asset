@@ -10,12 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3847a56b33b847346b023bee1ac64769, type: 3}
-  m_Name: StingRay FishDataObject
+  m_Name: Jellyfish FishDataObject 1
   m_EditorClassIdentifier: 
-  _fishNameTextField: 
-  BodyOfWaterType: []
-  ToolRequired: []
-  CastingRange: []
-  Attractant: []
-  EnticeMethod: []
-  RetrievalMethod: []
+  _fishNameTextField: StingRay
+  BodyOfWaterType:
+  - {fileID: 11400000, guid: 8c40e4c909bfa6b4d89b681ab3db0aa1, type: 2}
+  TimeOfDay:
+  - {fileID: 0}
+  ToolRequired:
+  - {fileID: 11400000, guid: f7384bcdc3bf41a47ac15d3d273b2e74, type: 2}
+  CastingRange:
+  - {fileID: 11400000, guid: d0f3cd9914fe5ab4491dc71f33713740, type: 2}
+  Attractant:
+  - {fileID: 11400000, guid: 773fb78de78f56148926e3d189d19a3e, type: 2}
+  EnticeMethod:
+  - {fileID: 11400000, guid: a096255606292d841a2c61e82b374dbd, type: 2}
+  RetrievalMethod:
+  - {fileID: 11400000, guid: d85194e1af48d9e43a82403942562916, type: 2}
