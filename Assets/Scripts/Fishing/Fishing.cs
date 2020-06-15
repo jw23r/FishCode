@@ -1,22 +1,37 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using Random = UnityEngine.Random;
 
 public class Fishing : MonoBehaviour
 {
     public FishDataCollection fish;
-    List <FishDataObject> catchable = new List<FishDataObject>();
+    List<FishDataObject> catchable = new List<FishDataObject>();
     string fishDataCollectionAttraction;
-    
+    string fishDataCollectionBodyOfWaterType;
+    string fishDataCollectionTimeOfDay;
+    string fishDataCollectionToolRequiredy;
+    string fishDataCollectionEnticeMethod;
+    string fishDataCollectionRetrievalMethod;
+    string fishDataCollectionCastingRange;
+
+
+
+
+
+
+
+
+
     //curreent fishing methdos
     string currentFishAttraction;
     string currentFishRetrivalMethdod;
     string currentFishCastingRange;
     string currentFishTimeOfDay;
-    string currentFishBodyOfWaterType;
+    static public string currentFishBodyOfWaterType;
     string currentFishToolRequired;
     string currentFishEnticeMethdod;
 
@@ -32,11 +47,12 @@ public class Fishing : MonoBehaviour
     public Dropdown enticeMethdodOptions;
 
 
+    int fishCaught;
 
     enum currentAttractant
-    {  Lure, Living }
+    { Lure, Living }
     enum currentRetrivalMethdod
-    { Instant, Constant, On,Off }
+    { Instant, Constant, On, Off }
     enum currentCastingRange
     { Close, Far }
     enum currentTimeOfDay
@@ -44,7 +60,7 @@ public class Fishing : MonoBehaviour
     enum currentBodyOfWaterType
     { Ocean, Lake, Pond, Stream }
     enum currentToolRequiredOptions
-    {  Rod, Spear }
+    { Rod, Spear }
     enum currententiceMethdod
     {
         Rhythmic, Random, Predictive
@@ -52,30 +68,96 @@ public class Fishing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-       // print(catchable[0]);
+        fishDataCollectionBodyOfWaterType = "Ocearwefesn";
+        // print(catchable[0]);
         DropDownOptions();
+
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
+        
         //  print(attractantOptions.value);
-        fishDataCollectionAttraction = fish.FishDataObjects[1].Attractant[0].instanceOfEnum.ToString();
-        SetCurrentFishingMethdod();
-        print(currentFishAttraction);
-        /*
-        if (fishy == fishyss)
-        {
-            print("caught yeah");
-            catchable.Add(fish.FishDataObjects[1]);
-        }
-        print((currentAttractant)attractantOptions.value);
 
-        print((currentAttractant)attractantOptions.value);
-        */
         SetCurrentFishingMethdod();
+
+        //print(currentFishAttraction);
+
+        //  print((currentAttractant)attractantOptions.value);
+
+        // print((currentAttractant)attractantOptions.value);
+
+        // SetCurrentFishingMethdod();
+    }
+
+    public void CastAndFish()
+    {
+
+
+        for (int i = 0; i < fish.FishDataObjects.Count; i++)
+        {
+            //  print(fish.FishDataObjects.Count);
+           // print(i);
+            fishDataCollectionAttraction = fish.FishDataObjects[i].Attractant[0].instanceOfEnum.ToString();
+            fishDataCollectionBodyOfWaterType = fish.FishDataObjects[i].BodyOfWaterType[0].instanceOfEnum.ToString();
+            fishDataCollectionTimeOfDay = fish.FishDataObjects[i].TimeOfDay[0].instanceOfEnum.ToString();
+            fishDataCollectionToolRequiredy = fish.FishDataObjects[i].ToolRequired[0].instanceOfEnum.ToString();
+            fishDataCollectionEnticeMethod = fish.FishDataObjects[i].EnticeMethod[0].instanceOfEnum.ToString();
+            fishDataCollectionRetrievalMethod = fish.FishDataObjects[i].RetrievalMethod[0].instanceOfEnum.ToString();
+            fishDataCollectionCastingRange = fish.FishDataObjects[i].CastingRange[0].instanceOfEnum.ToString();
+            if (currentFishBodyOfWaterType == "Ocean" || currentFishBodyOfWaterType == "Lake" || currentFishBodyOfWaterType == "Pond" || currentFishBodyOfWaterType == "Stream")
+            {
+              //  print("1");
+
+                if (fishDataCollectionBodyOfWaterType == currentFishBodyOfWaterType || fishDataCollectionBodyOfWaterType == "None" || fishDataCollectionBodyOfWaterType == "Any")
+                {
+                   // print("2");
+
+                    if (fishDataCollectionAttraction == currentFishAttraction || fishDataCollectionAttraction == "Any" || fishDataCollectionAttraction == "None")
+                    {
+                       // print("3");
+
+                        if (fishDataCollectionTimeOfDay == currentFishTimeOfDay || fishDataCollectionTimeOfDay == "Any" || fishDataCollectionTimeOfDay == "None")
+                        {
+                           // print("4");
+
+                            if (fishDataCollectionToolRequiredy == currentFishToolRequired || fishDataCollectionToolRequiredy == "Any" || fishDataCollectionToolRequiredy == "None")
+                            {
+                            //    print("5");
+
+                                if (fishDataCollectionEnticeMethod == currentFishEnticeMethdod || fishDataCollectionEnticeMethod == "Any" || fishDataCollectionEnticeMethod == "None")
+                                {
+                                  //  print("6");
+
+                                    if (fishDataCollectionRetrievalMethod == currentFishRetrivalMethdod || fishDataCollectionRetrievalMethod == "Any" || fishDataCollectionRetrievalMethod == "None")
+                                    {
+                                      //  print("7");
+
+                                        if (fishDataCollectionCastingRange == currentFishCastingRange || fishDataCollectionCastingRange == "Any" || fishDataCollectionCastingRange == "None")
+                                        {
+                                        //    print("8");
+                                            catchable.Add(fish.FishDataObjects[i]);
+                                            //  print(catchable[0].FishNameTextField);
+                                            print(i);
+                                            if (i >= fish.FishDataObjects.Count - 1)
+                                            {
+                                                fishCaught = Random.Range(0, i + 1);
+                                                print(catchable[fishCaught].FishNameTextField);
+                                                catchable.Clear();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
     }
 
     private void SetCurrentFishingMethdod()
@@ -118,13 +200,13 @@ public class Fishing : MonoBehaviour
         {
 
 
-            currentFishCastingRange = currentRetrivalMethdod.Constant.ToString();
+            currentFishCastingRange = currentCastingRange.Close.ToString();
         }
         if (currentCastingRange.Far == (currentCastingRange)CastingRangeOptions.value)
         {
 
 
-            currentFishCastingRange = currentRetrivalMethdod.Constant.ToString();
+            currentFishCastingRange = currentCastingRange.Far.ToString();
         }
         /// sets string for time of day
         if (currentTimeOfDay.Day == (currentTimeOfDay)TimeOfDayOptions.value)
@@ -139,13 +221,13 @@ public class Fishing : MonoBehaviour
 
             currentFishTimeOfDay = currentTimeOfDay.Evening.ToString();
         }
-           if (currentTimeOfDay.Morning == (currentTimeOfDay)TimeOfDayOptions.value)
+        if (currentTimeOfDay.Morning == (currentTimeOfDay)TimeOfDayOptions.value)
         {
 
 
             currentFishTimeOfDay = currentTimeOfDay.Morning.ToString();
         }
-         
+
         if (currentTimeOfDay.Night == (currentTimeOfDay)TimeOfDayOptions.value)
         {
 
@@ -176,7 +258,7 @@ public class Fishing : MonoBehaviour
 
 
             currentFishBodyOfWaterType = currentBodyOfWaterType.Stream.ToString();
-        }  
+        }
         //sets string for tool
         if (currentToolRequiredOptions.Rod == (currentToolRequiredOptions)toolRequiredOptions.value)
         {
