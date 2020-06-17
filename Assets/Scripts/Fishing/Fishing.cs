@@ -175,7 +175,6 @@ public class Fishing : MonoBehaviour
                 continue;
 
             }
-            print("got here");
         }
     
 
