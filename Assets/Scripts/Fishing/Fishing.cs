@@ -46,9 +46,10 @@ public class Fishing : MonoBehaviour
     public Dropdown toolRequiredOptions;
     public Dropdown enticeMethdodOptions;
 
+    public BodyOfWaterType water;
 
     int fishCaught;
-
+    /*
     enum currentAttractant
     { Lure, Living }
     enum currentRetrivalMethdod
@@ -57,14 +58,14 @@ public class Fishing : MonoBehaviour
     { Close, Far }
     enum currentTimeOfDay
     { Morning, Day, Evening, Night }
-    enum currentBodyOfWaterType
-    { Ocean, Lake, Pond, Stream }
     enum currentToolRequiredOptions
     { Rod, Spear }
+    enum currentBodyOfWaterType
+    { Ocean, Lake, Pond, Stream }
     enum currententiceMethdod
     {
         Rhythmic, Random, Predictive
-    }
+    }*/
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +79,10 @@ public class Fishing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //print(fish.FishDataObjects[0].BodyOfWaterType[BodyOfWaterTypeOptions.value].instanceOfEnum);
+        print((BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value);
+  
+        //print(fish.FishDataObjects[0].BodyOfWaterType[0].instanceOfEnum);
         //  print(attractantOptions.value);
 
         SetCurrentFishingMethdod();
@@ -94,8 +98,20 @@ public class Fishing : MonoBehaviour
 
     public void CastAndFish()
     {
+        
+        if (fish.FishDataObjects[0].BodyOfWaterType[0].instanceOfEnum == (BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value) 
+        {
+            print("fuck yeah i did it");
+        }
+        else
+        {
+            print("not working dumb ass");
+        }
+        
 
+        
 
+        /*
         for (int i = 0; i < fish.FishDataObjects.Count; i++)
         {
             //  print(fish.FishDataObjects.Count);
@@ -157,12 +173,12 @@ public class Fishing : MonoBehaviour
                 }
             }
 
-        }
+        }*/
     }
 
     private void SetCurrentFishingMethdod()
     {
-        if (currentAttractant.Lure == (currentAttractant)attractantOptions.value)
+       /* if (currentAttractant.Lure == (currentAttractant)attractantOptions.value)
         {
             currentFishAttraction = currentAttractant.Lure.ToString();
         }
@@ -293,46 +309,80 @@ public class Fishing : MonoBehaviour
 
             currentFishEnticeMethdod = currententiceMethdod.Rhythmic.ToString();
         }
-
+        */
 
 
     }
 
     void DropDownOptions()
-    {
-        // sets attraction dropdown
-        string[] enumAttractant = Enum.GetNames(typeof(currentAttractant));
+    {  // sets attraction dropdown
+        string[] enumAttractant = Enum.GetNames(typeof(Attractant.attractant));
         List<string> currentAttractantDDOptions = new List<string>(enumAttractant);
         attractantOptions.AddOptions(currentAttractantDDOptions);
         // sets retrival dropdown
 
-        string[] enumRetrivalMethodOptions = Enum.GetNames(typeof(currentRetrivalMethdod));
+        string[] enumRetrivalMethodOptions = Enum.GetNames(typeof(RetrievalMethod.retrievalMethod));
         List<string> currentRetrivalMethdodDDOptions = new List<string>(enumRetrivalMethodOptions);
         RetrivalMethodOptions.AddOptions(currentRetrivalMethdodDDOptions);
 
         // sets casting range methdod
-        string[] enumCastingRangeOptions = Enum.GetNames(typeof(currentCastingRange));
+        string[] enumCastingRangeOptions = Enum.GetNames(typeof(CastingRange.castingRange));
         List<string> enumCastingRangeDDOptions = new List<string>(enumCastingRangeOptions);
         CastingRangeOptions.AddOptions(enumCastingRangeDDOptions);
 
         //sets time of day
-        string[] enumCurrentTimeOfDay = Enum.GetNames(typeof(currentTimeOfDay));
+        string[] enumCurrentTimeOfDay = Enum.GetNames(typeof(TimeOfDay.timeOfDay));
         List<string> enumCurrentTimeOfDayDDOptions = new List<string>(enumCurrentTimeOfDay);
         TimeOfDayOptions.AddOptions(enumCurrentTimeOfDayDDOptions);
 
         //sets type of water
-        string[] enumcurrentBodyOfWaterType = Enum.GetNames(typeof(currentBodyOfWaterType));
+        string[] enumcurrentBodyOfWaterType = Enum.GetNames(typeof(BodyOfWaterType.bodyOfWaterType));
         List<string> enumcurrentBodyOfWaterTypeDDOptions = new List<string>(enumcurrentBodyOfWaterType);
         BodyOfWaterTypeOptions.AddOptions(enumcurrentBodyOfWaterTypeDDOptions);
-
+        
         //sets entice required
-        string[] enumcurrententiceMethdod = Enum.GetNames(typeof(currententiceMethdod));
+        string[] enumcurrententiceMethdod = Enum.GetNames(typeof(EnticeMethod.enticeMethod));
         List<string> enumenumcurrententiceMethdodDDOptions = new List<string>(enumcurrententiceMethdod);
         enticeMethdodOptions.AddOptions(enumenumcurrententiceMethdodDDOptions);
 
         //setsentice methdod
-        string[] enumcurrentToolRequiredOptions = Enum.GetNames(typeof(currentToolRequiredOptions));
+        string[] enumcurrentToolRequiredOptions = Enum.GetNames(typeof(ToolRequired.toolRequired));
         List<string> enumcurrentToolRequireddDDOptions = new List<string>(enumcurrentToolRequiredOptions);
         toolRequiredOptions.AddOptions(enumcurrentToolRequireddDDOptions);
+        /*   // sets attraction dropdown
+           string[] enumAttractant = Enum.GetNames(typeof(currentAttractant));
+           List<string> currentAttractantDDOptions = new List<string>(enumAttractant);
+           attractantOptions.AddOptions(currentAttractantDDOptions);
+           // sets retrival dropdown
+
+           string[] enumRetrivalMethodOptions = Enum.GetNames(typeof(currentRetrivalMethdod));
+           List<string> currentRetrivalMethdodDDOptions = new List<string>(enumRetrivalMethodOptions);
+           RetrivalMethodOptions.AddOptions(currentRetrivalMethdodDDOptions);
+
+           // sets casting range methdod
+           string[] enumCastingRangeOptions = Enum.GetNames(typeof(currentCastingRange));
+           List<string> enumCastingRangeDDOptions = new List<string>(enumCastingRangeOptions);
+           CastingRangeOptions.AddOptions(enumCastingRangeDDOptions);
+
+           //sets time of day
+           string[] enumCurrentTimeOfDay = Enum.GetNames(typeof(currentTimeOfDay));
+           List<string> enumCurrentTimeOfDayDDOptions = new List<string>(enumCurrentTimeOfDay);
+           TimeOfDayOptions.AddOptions(enumCurrentTimeOfDayDDOptions);
+
+           //sets type of water
+           string[] enumcurrentBodyOfWaterType = Enum.GetNames(typeof(currentBodyOfWaterType));
+           List<string> enumcurrentBodyOfWaterTypeDDOptions = new List<string>(enumcurrentBodyOfWaterType);
+           BodyOfWaterTypeOptions.AddOptions(enumcurrentBodyOfWaterTypeDDOptions);
+
+           //sets entice required
+           string[] enumcurrententiceMethdod = Enum.GetNames(typeof(currententiceMethdod));
+           List<string> enumenumcurrententiceMethdodDDOptions = new List<string>(enumcurrententiceMethdod);
+           enticeMethdodOptions.AddOptions(enumenumcurrententiceMethdodDDOptions);
+
+           //setsentice methdod
+           string[] enumcurrentToolRequiredOptions = Enum.GetNames(typeof(currentToolRequiredOptions));
+           List<string> enumcurrentToolRequireddDDOptions = new List<string>(enumcurrentToolRequiredOptions);
+           toolRequiredOptions.AddOptions(enumcurrentToolRequireddDDOptions);
+           */
     }
 }

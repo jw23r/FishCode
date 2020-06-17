@@ -7,10 +7,13 @@ public class BodyOfWaterType : ScriptableObject
 {
     // Start is called before the first frame update
     [System.Serializable]
-   public enum bodyOfWaterType
+   public  enum bodyOfWaterType
     { None, Any, Ocean, Lake, Pond, Stream }
 
     public bodyOfWaterType instanceOfEnum;
+ 
+
+
 
 
 }
