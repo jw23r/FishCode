@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e3121581f70d14386f2e494d489015, type: 3}
   m_Name: AnyBodyOfWwaterType
   m_EditorClassIdentifier: 
-  instanceOfEnum: 1
+  instanceOfEnum: 3

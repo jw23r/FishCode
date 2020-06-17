@@ -80,8 +80,8 @@ public class Fishing : MonoBehaviour
     void Update()
     {
         //print(fish.FishDataObjects[0].BodyOfWaterType[BodyOfWaterTypeOptions.value].instanceOfEnum);
-        print((BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value);
-  
+     //   print((BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value);
+
         //print(fish.FishDataObjects[0].BodyOfWaterType[0].instanceOfEnum);
         //  print(attractantOptions.value);
 
@@ -98,18 +98,87 @@ public class Fishing : MonoBehaviour
 
     public void CastAndFish()
     {
-        
-        if (fish.FishDataObjects[0].BodyOfWaterType[0].instanceOfEnum == (BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value) 
+        for (int i = 0; i < fish.FishDataObjects.Count; i++)
         {
-            print("fuck yeah i did it");
-        }
-        else
-        {
-            print("not working dumb ass");
-        }
-        
+            catchable.Add(fish.FishDataObjects[i]);
 
-        
+        }
+
+        for (int j = catchable.Count -1; j >= 0; j--)
+        {
+            //print(j);
+            print(catchable.Count);
+            if (catchable[j].BodyOfWaterType[0].instanceOfEnum != (BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value &&
+                catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.Any &&
+                catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.None)
+            {
+                print("removing1");
+                catchable.RemoveAt(j);
+                continue;
+            }
+
+            if (catchable[j].Attractant[0].instanceOfEnum != (Attractant.attractant)attractantOptions.value &&
+                catchable[j].Attractant[0].instanceOfEnum != Attractant.attractant.Any &&
+                catchable[j].Attractant[0].instanceOfEnum != Attractant.attractant.None)
+            {
+                print("removing2");
+
+                catchable.RemoveAt(j);
+                continue;
+
+            }
+            if (catchable[j].CastingRange[0].instanceOfEnum != (CastingRange.castingRange)CastingRangeOptions.value)
+            {
+                print("removing3");
+
+                catchable.RemoveAt(j);
+                continue;
+
+            }
+            if (catchable[j].EnticeMethod[0].instanceOfEnum != (EnticeMethod.enticeMethod)enticeMethdodOptions.value &&
+             catchable[j].EnticeMethod[0].instanceOfEnum != EnticeMethod.enticeMethod.Any &&
+             catchable[j].EnticeMethod[0].instanceOfEnum != EnticeMethod.enticeMethod.None)
+            {
+                print("removing4");
+
+                catchable.RemoveAt(j);
+                continue;
+
+            }
+            if (catchable[j].RetrievalMethod[0].instanceOfEnum != (RetrievalMethod.retrievalMethod)RetrivalMethodOptions.value &&
+             catchable[j].RetrievalMethod[0].instanceOfEnum != RetrievalMethod.retrievalMethod.Off &&
+             catchable[j].RetrievalMethod[0].instanceOfEnum != RetrievalMethod.retrievalMethod.On)
+            {
+                print("removing5");
+
+                catchable.RemoveAt(j);
+                continue;
+
+            }
+            if (catchable[j].TimeOfDay[0].instanceOfEnum != (TimeOfDay.timeOfDay)TimeOfDayOptions.value &&
+        catchable[j].TimeOfDay[0].instanceOfEnum != TimeOfDay.timeOfDay.Any)
+
+            {
+                print("removing6");
+
+                catchable.RemoveAt(j);
+                continue;
+
+            }
+            if (catchable[j].ToolRequired[0].instanceOfEnum != (ToolRequired.toolRequired)attractantOptions.value &&
+              catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.Any &&
+              catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.None)
+            {
+                print("removing7");
+
+                catchable.RemoveAt(j);
+                continue;
+
+            }
+            print("got here");
+        }
+    
+
 
         /*
         for (int i = 0; i < fish.FishDataObjects.Count; i++)
@@ -178,138 +247,138 @@ public class Fishing : MonoBehaviour
 
     private void SetCurrentFishingMethdod()
     {
-       /* if (currentAttractant.Lure == (currentAttractant)attractantOptions.value)
-        {
-            currentFishAttraction = currentAttractant.Lure.ToString();
-        }
-        if (currentAttractant.Living == (currentAttractant)attractantOptions.value)
-        {
-            currentFishAttraction = currentAttractant.Living.ToString();
-        }
-        //sets retrival methdod
-        if (currentRetrivalMethdod.Constant == (currentRetrivalMethdod)RetrivalMethodOptions.value)
-        {
+        /* if (currentAttractant.Lure == (currentAttractant)attractantOptions.value)
+         {
+             currentFishAttraction = currentAttractant.Lure.ToString();
+         }
+         if (currentAttractant.Living == (currentAttractant)attractantOptions.value)
+         {
+             currentFishAttraction = currentAttractant.Living.ToString();
+         }
+         //sets retrival methdod
+         if (currentRetrivalMethdod.Constant == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+         {
 
 
-            currentFishRetrivalMethdod = currentRetrivalMethdod.Constant.ToString();
-        }
-        if (currentRetrivalMethdod.Instant == (currentRetrivalMethdod)RetrivalMethodOptions.value)
-        {
+             currentFishRetrivalMethdod = currentRetrivalMethdod.Constant.ToString();
+         }
+         if (currentRetrivalMethdod.Instant == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+         {
 
 
-            currentFishRetrivalMethdod = currentRetrivalMethdod.Instant.ToString();
-        }
-        if (currentRetrivalMethdod.Off == (currentRetrivalMethdod)RetrivalMethodOptions.value)
-        {
+             currentFishRetrivalMethdod = currentRetrivalMethdod.Instant.ToString();
+         }
+         if (currentRetrivalMethdod.Off == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+         {
 
 
-            currentFishRetrivalMethdod = currentRetrivalMethdod.Off.ToString();
-        }
-        if (currentRetrivalMethdod.On == (currentRetrivalMethdod)RetrivalMethodOptions.value)
-        {
+             currentFishRetrivalMethdod = currentRetrivalMethdod.Off.ToString();
+         }
+         if (currentRetrivalMethdod.On == (currentRetrivalMethdod)RetrivalMethodOptions.value)
+         {
 
 
-            currentFishRetrivalMethdod = currentRetrivalMethdod.On.ToString();
-        }
-        //sets how far to cast
-        if (currentCastingRange.Close == (currentCastingRange)CastingRangeOptions.value)
-        {
+             currentFishRetrivalMethdod = currentRetrivalMethdod.On.ToString();
+         }
+         //sets how far to cast
+         if (currentCastingRange.Close == (currentCastingRange)CastingRangeOptions.value)
+         {
 
 
-            currentFishCastingRange = currentCastingRange.Close.ToString();
-        }
-        if (currentCastingRange.Far == (currentCastingRange)CastingRangeOptions.value)
-        {
+             currentFishCastingRange = currentCastingRange.Close.ToString();
+         }
+         if (currentCastingRange.Far == (currentCastingRange)CastingRangeOptions.value)
+         {
 
 
-            currentFishCastingRange = currentCastingRange.Far.ToString();
-        }
-        /// sets string for time of day
-        if (currentTimeOfDay.Day == (currentTimeOfDay)TimeOfDayOptions.value)
-        {
+             currentFishCastingRange = currentCastingRange.Far.ToString();
+         }
+         /// sets string for time of day
+         if (currentTimeOfDay.Day == (currentTimeOfDay)TimeOfDayOptions.value)
+         {
 
 
-            currentFishTimeOfDay = currentTimeOfDay.Day.ToString();
-        }
-        if (currentTimeOfDay.Evening == (currentTimeOfDay)TimeOfDayOptions.value)
-        {
+             currentFishTimeOfDay = currentTimeOfDay.Day.ToString();
+         }
+         if (currentTimeOfDay.Evening == (currentTimeOfDay)TimeOfDayOptions.value)
+         {
 
 
-            currentFishTimeOfDay = currentTimeOfDay.Evening.ToString();
-        }
-        if (currentTimeOfDay.Morning == (currentTimeOfDay)TimeOfDayOptions.value)
-        {
+             currentFishTimeOfDay = currentTimeOfDay.Evening.ToString();
+         }
+         if (currentTimeOfDay.Morning == (currentTimeOfDay)TimeOfDayOptions.value)
+         {
 
 
-            currentFishTimeOfDay = currentTimeOfDay.Morning.ToString();
-        }
+             currentFishTimeOfDay = currentTimeOfDay.Morning.ToString();
+         }
 
-        if (currentTimeOfDay.Night == (currentTimeOfDay)TimeOfDayOptions.value)
-        {
-
-
-            currentFishTimeOfDay = currentTimeOfDay.Night.ToString();
-        }
-        //sets body of water type
-        if (currentBodyOfWaterType.Ocean == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
-        {
+         if (currentTimeOfDay.Night == (currentTimeOfDay)TimeOfDayOptions.value)
+         {
 
 
-            currentFishBodyOfWaterType = currentBodyOfWaterType.Ocean.ToString();
-        }
-        if (currentBodyOfWaterType.Lake == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
-        {
+             currentFishTimeOfDay = currentTimeOfDay.Night.ToString();
+         }
+         //sets body of water type
+         if (currentBodyOfWaterType.Ocean == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+         {
 
 
-            currentFishBodyOfWaterType = currentBodyOfWaterType.Lake.ToString();
-        }
-        if (currentBodyOfWaterType.Pond == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
-        {
+             currentFishBodyOfWaterType = currentBodyOfWaterType.Ocean.ToString();
+         }
+         if (currentBodyOfWaterType.Lake == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+         {
 
 
-            currentFishBodyOfWaterType = currentBodyOfWaterType.Pond.ToString();
-        }
-        if (currentBodyOfWaterType.Stream == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
-        {
+             currentFishBodyOfWaterType = currentBodyOfWaterType.Lake.ToString();
+         }
+         if (currentBodyOfWaterType.Pond == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+         {
 
 
-            currentFishBodyOfWaterType = currentBodyOfWaterType.Stream.ToString();
-        }
-        //sets string for tool
-        if (currentToolRequiredOptions.Rod == (currentToolRequiredOptions)toolRequiredOptions.value)
-        {
+             currentFishBodyOfWaterType = currentBodyOfWaterType.Pond.ToString();
+         }
+         if (currentBodyOfWaterType.Stream == (currentBodyOfWaterType)BodyOfWaterTypeOptions.value)
+         {
 
 
-            currentFishToolRequired = currentToolRequiredOptions.Rod.ToString();
-        }
-        if (currentToolRequiredOptions.Spear == (currentToolRequiredOptions)toolRequiredOptions.value)
-        {
+             currentFishBodyOfWaterType = currentBodyOfWaterType.Stream.ToString();
+         }
+         //sets string for tool
+         if (currentToolRequiredOptions.Rod == (currentToolRequiredOptions)toolRequiredOptions.value)
+         {
 
 
-            currentFishToolRequired = currentToolRequiredOptions.Spear.ToString();
-        }
-        // sets string for entice
-        if (currententiceMethdod.Predictive == (currententiceMethdod)enticeMethdodOptions.value)
-        {
+             currentFishToolRequired = currentToolRequiredOptions.Rod.ToString();
+         }
+         if (currentToolRequiredOptions.Spear == (currentToolRequiredOptions)toolRequiredOptions.value)
+         {
 
 
-            currentFishEnticeMethdod = currententiceMethdod.Predictive.ToString();
-        }
+             currentFishToolRequired = currentToolRequiredOptions.Spear.ToString();
+         }
+         // sets string for entice
+         if (currententiceMethdod.Predictive == (currententiceMethdod)enticeMethdodOptions.value)
+         {
 
 
-        if (currententiceMethdod.Random == (currententiceMethdod)enticeMethdodOptions.value)
-        {
+             currentFishEnticeMethdod = currententiceMethdod.Predictive.ToString();
+         }
 
 
-            currentFishEnticeMethdod = currententiceMethdod.Random.ToString();
-        }
-        if (currententiceMethdod.Rhythmic == (currententiceMethdod)enticeMethdodOptions.value)
-        {
+         if (currententiceMethdod.Random == (currententiceMethdod)enticeMethdodOptions.value)
+         {
 
 
-            currentFishEnticeMethdod = currententiceMethdod.Rhythmic.ToString();
-        }
-        */
+             currentFishEnticeMethdod = currententiceMethdod.Random.ToString();
+         }
+         if (currententiceMethdod.Rhythmic == (currententiceMethdod)enticeMethdodOptions.value)
+         {
+
+
+             currentFishEnticeMethdod = currententiceMethdod.Rhythmic.ToString();
+         }
+         */
 
 
     }
@@ -339,7 +408,7 @@ public class Fishing : MonoBehaviour
         string[] enumcurrentBodyOfWaterType = Enum.GetNames(typeof(BodyOfWaterType.bodyOfWaterType));
         List<string> enumcurrentBodyOfWaterTypeDDOptions = new List<string>(enumcurrentBodyOfWaterType);
         BodyOfWaterTypeOptions.AddOptions(enumcurrentBodyOfWaterTypeDDOptions);
-        
+
         //sets entice required
         string[] enumcurrententiceMethdod = Enum.GetNames(typeof(EnticeMethod.enticeMethod));
         List<string> enumenumcurrententiceMethdodDDOptions = new List<string>(enumcurrententiceMethdod);
