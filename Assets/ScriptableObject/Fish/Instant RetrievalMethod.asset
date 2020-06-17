@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1dd65eeac9af44449a86d73ccb03394, type: 3}
   m_Name: Instant RetrievalMethod
   m_EditorClassIdentifier: 
-  instanceOfEnum: 0
+  instanceOfEnum: 1
