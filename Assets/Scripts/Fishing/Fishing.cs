@@ -165,7 +165,7 @@ public class Fishing : MonoBehaviour
                 continue;
 
             }
-            if (catchable[j].ToolRequired[0].instanceOfEnum != (ToolRequired.toolRequired)attractantOptions.value &&
+            if (catchable[j].ToolRequired[0].instanceOfEnum != (ToolRequired.toolRequired)toolRequiredOptions.value &&
               catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.Any &&
               catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.None)
             {
@@ -176,6 +176,12 @@ public class Fishing : MonoBehaviour
 
             }
         }
+            if(catchable.Count > 0)
+            {
+                int i = Random.Range(0, catchable.Count);
+            print("You caught A" + catchable[i].FishNameTextField);
+            catchable.Clear();
+            }
     
 
 

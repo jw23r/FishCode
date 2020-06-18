@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e64a8e9892cb443b2d56721c187273, type: 3}
   m_Name: Evening TimeOfDay
   m_EditorClassIdentifier: 
-  instanceOfEnum: 5
+  instanceOfEnum: 4
