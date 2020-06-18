@@ -118,7 +118,7 @@ public class Fishing : MonoBehaviour
                 catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.Any &&
                 catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.None)
             {
-                print("removing1");
+             //   print("removing1");
                 catchable.RemoveAt(j);
                 continue;
             }
@@ -127,7 +127,7 @@ public class Fishing : MonoBehaviour
                 catchable[j].Attractant[0].instanceOfEnum != Attractant.attractant.Any &&
                 catchable[j].Attractant[0].instanceOfEnum != Attractant.attractant.None)
             {
-                print("removing2");
+              //  print("removing2");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -135,7 +135,7 @@ public class Fishing : MonoBehaviour
             }
             if (catchable[j].CastingRange[0].instanceOfEnum != (CastingRange.castingRange)CastingRangeOptions.value)
             {
-                print("removing3");
+                //print("removing3");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -145,7 +145,7 @@ public class Fishing : MonoBehaviour
              catchable[j].EnticeMethod[0].instanceOfEnum != EnticeMethod.enticeMethod.Any &&
              catchable[j].EnticeMethod[0].instanceOfEnum != EnticeMethod.enticeMethod.None)
             {
-                print("removing4");
+                //print("removing4");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -155,7 +155,7 @@ public class Fishing : MonoBehaviour
              catchable[j].RetrievalMethod[0].instanceOfEnum != RetrievalMethod.retrievalMethod.Off &&
              catchable[j].RetrievalMethod[0].instanceOfEnum != RetrievalMethod.retrievalMethod.On)
             {
-                print("removing5");
+                //print("removing5");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -165,7 +165,7 @@ public class Fishing : MonoBehaviour
         catchable[j].TimeOfDay[0].instanceOfEnum != TimeOfDay.timeOfDay.Any)
 
             {
-                print("removing6");
+             //   print("removing6");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -175,7 +175,7 @@ public class Fishing : MonoBehaviour
               catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.Any &&
               catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.None)
             {
-                print("removing7");
+               // print("removing7");
 
                 catchable.RemoveAt(j);
                 continue;
