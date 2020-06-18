@@ -11,7 +11,7 @@ public class Fishing : MonoBehaviour
     public FishDataCollection fish;
     List<FishDataObject> catchable = new List<FishDataObject>();
     string fishDataCollectionAttraction;
-    string fishDataCollectionBodyOfWaterType;
+   
     string fishDataCollectionTimeOfDay;
     string fishDataCollectionToolRequiredy;
     string fishDataCollectionEnticeMethod;
@@ -31,7 +31,7 @@ public class Fishing : MonoBehaviour
     string currentFishRetrivalMethdod;
     string currentFishCastingRange;
     string currentFishTimeOfDay;
-    static public string currentFishBodyOfWaterType;
+    static public string currentFishBodyOfWaterType = "nothing";
     string currentFishToolRequired;
     string currentFishEnticeMethdod;
 
@@ -69,7 +69,7 @@ public class Fishing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fishDataCollectionBodyOfWaterType = "Ocearwefesn";
+       
         // print(catchable[0]);
         DropDownOptions();
 
@@ -85,7 +85,7 @@ public class Fishing : MonoBehaviour
         //print(fish.FishDataObjects[0].BodyOfWaterType[0].instanceOfEnum);
         //  print(attractantOptions.value);
 
-        SetCurrentFishingMethdod();
+        
 
         //print(currentFishAttraction);
 
@@ -96,8 +96,13 @@ public class Fishing : MonoBehaviour
         // SetCurrentFishingMethdod();
     }
 
-    public void CastAndFish()
+  public void CastAndFish()
     {
+        if(currentFishBodyOfWaterType == "nothing")
+        {
+            print("cant fish here");
+            return;
+        }
         for (int i = 0; i < fish.FishDataObjects.Count; i++)
         {
             catchable.Add(fish.FishDataObjects[i]);
@@ -106,9 +111,10 @@ public class Fishing : MonoBehaviour
 
         for (int j = catchable.Count -1; j >= 0; j--)
         {
+          string waterType =  catchable[j].BodyOfWaterType[0].instanceOfEnum.ToString();
             //print(j);
             print(catchable.Count);
-            if (catchable[j].BodyOfWaterType[0].instanceOfEnum != (BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value &&
+            if (waterType != currentFishBodyOfWaterType &&
                 catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.Any &&
                 catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.None)
             {

@@ -18,7 +18,9 @@ public class ObjectsBodyOfWaterTyper : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
+           
             Fishing.currentFishBodyOfWaterType = water;
+            print("changed water type to " + Fishing.currentFishBodyOfWaterType);
         }
         
     }
@@ -26,7 +28,8 @@ public class ObjectsBodyOfWaterTyper : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            Fishing.currentFishBodyOfWaterType = "There is No Water";
+            Fishing.currentFishBodyOfWaterType = "nothing";
+            print("your water is currently " + Fishing.currentFishBodyOfWaterType);
         }
     }
 }
