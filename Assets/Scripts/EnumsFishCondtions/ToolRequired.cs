@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New ToolRequired", menuName = "Tool Required")]
-public class ToolRequired : ScriptableObject
+public class ToolRequired : SingletonScriptableObject<ToolRequired>
 {
     // Start is called before the first frame update
     [System.Serializable]

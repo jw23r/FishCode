@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New CastingRange", menuName = "Casting Range ")]
-public class CastingRange : ScriptableObject
+public class CastingRange : SingletonScriptableObject<CastingRange>
 {
     // Start is called before the first frame update
     [System.Serializable]

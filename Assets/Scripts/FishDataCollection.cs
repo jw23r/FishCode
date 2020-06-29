@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 [CreateAssetMenu(fileName = "New FishDataCollection", menuName = "Fish Data Collection")]
-public class FishDataCollection : ScriptableObject
+public class FishDataCollection : SingletonScriptableObject<FishDataCollection>
 {
     #region Properties
     public ReadOnlyCollection<FishDataObject> FishDataObjects { get { return _fishDataObjects.AsReadOnly(); } } // NOTE: We can protect this data field by only allowing public access to a read only collection:

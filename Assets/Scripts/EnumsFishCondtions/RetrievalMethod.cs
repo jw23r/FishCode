@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New RetrievalMethod", menuName = "Retrieval Method")]
-public class RetrievalMethod : ScriptableObject
+public class RetrievalMethod : SingletonScriptableObject<RetrievalMethod>
 {
     // Start is called before the first frame update
     [System.Serializable]

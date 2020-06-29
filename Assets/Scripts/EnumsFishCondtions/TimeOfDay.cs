@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New TimeOfDay", menuName = "Time Of Day")]
-public class TimeOfDay : ScriptableObject
+public class TimeOfDay : SingletonScriptableObject<TimeOfDay>
 {
     // Start is called before the first frame update
     [System.Serializable]

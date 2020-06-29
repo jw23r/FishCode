@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New BodyOfWwaterType", menuName = "Body of water Type")]
-public class BodyOfWaterType : ScriptableObject
+public class BodyOfWaterType : SingletonScriptableObject<BodyOfWaterType>  
 {
     // Start is called before the first frame update
     [System.Serializable]
