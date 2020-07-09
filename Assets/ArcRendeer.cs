@@ -22,7 +22,7 @@ public class ArcRendeer : MonoBehaviour
     void Start()
     {
         arc =  GetComponent<LineRenderer>();
-        gravity = Mathf.Abs(Physics.gravity.y);
+        gravity = Mathf.Abs (Physics.gravity.y);
 
         RenderArc();
     }
