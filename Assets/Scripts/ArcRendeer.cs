@@ -10,7 +10,11 @@ public class ArcRendeer : MonoBehaviour
     public int resolution = 10;
     float gravity;
     float radianAngle;
-     void OnValidate()
+    Vector3 mouseCurrentPostion;
+    Vector3 mouseOnLeftClickPostion;
+
+
+    void OnValidate()
     {
         if(arc != null && Application.isPlaying)
         {
@@ -21,14 +25,42 @@ public class ArcRendeer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         arc =  GetComponent<LineRenderer>();
+        if (arc.enabled == true) arc.enabled = false;
         gravity = Mathf.Abs (Physics.gravity.y);
 
-        RenderArc();
+       
     }
+    private void Update()
+    {
+        
+        if (arc.enabled == true)
+        {
+            velocity = .05f * Mathf.Abs(Input.mousePosition.y - mouseOnLeftClickPostion.y);
+            print(velocity);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (arc.enabled == false) arc.enabled = true;
+            mouseOnLeftClickPostion = Input.mousePosition;
+            
+        }
+        if (Input.GetMouseButton(0))
+        {
+            RenderArc();
+        }
+            if (Input.GetMouseButtonUp(0))
+        {
+            if (arc.enabled == true)
+            {
+                arc.enabled = false;
+            }
+        }
 
+    }
     // Update is called once per frame
-   void RenderArc()
+    void RenderArc()
     {
         arc.positionCount = (resolution + 1);
         arc.SetPositions(CalculateArcArray());
@@ -48,7 +80,7 @@ public class ArcRendeer : MonoBehaviour
     Vector3 CaluclateArcPoint(float t, float maxDistance)
     {
         float x = t * maxDistance;
-        float y = x * Mathf.Tan(radianAngle) - ((gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(radianAngle)));
+        float y = x * Mathf.Tan(radianAngle) - ((gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
         return new Vector3(x, y);
     }
 

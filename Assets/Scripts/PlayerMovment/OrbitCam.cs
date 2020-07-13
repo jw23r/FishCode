@@ -21,7 +21,13 @@ public class OrbitCam : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");// up and down
 
         yaw += mouseX * lookSensitivityX;
-        pitch += mouseY * lookSensitivityY;
+        if (Input.GetMouseButton(0))
+        {
+            pitch += 0;
+        }
+        else {
+            pitch += mouseY * lookSensitivityY;
+        }
         pitch = Mathf.Clamp(pitch,0, 89);
 
        Quaternion targetRot = Quaternion.Euler(pitch, yaw, 0);

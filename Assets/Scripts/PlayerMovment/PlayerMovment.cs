@@ -28,7 +28,7 @@ public class PlayerMovment : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        if (v != 0 && theCam != null)
+        if ( theCam != null)
         {
             Quaternion targetRot = Quaternion.Euler(0, theCam.yaw, 0);
             transform.rotation = AnimiMath.Dampen(transform.rotation, targetRot, .01f);
