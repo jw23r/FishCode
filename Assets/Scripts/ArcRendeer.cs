@@ -8,10 +8,10 @@ public class ArcRendeer : MonoBehaviour
     public float velocity;
     public float angle;
     public int resolution = 10;
-    float gravity;
-    float radianAngle;
-    Vector3 mouseCurrentPostion;
-    Vector3 mouseOnLeftClickPostion;
+    private float _gravity;
+    private float _radianAngle;
+   
+  private  Vector3 _mouseOnLeftClickPostion;
 
 
     void OnValidate()
@@ -28,7 +28,7 @@ public class ArcRendeer : MonoBehaviour
 
         arc =  GetComponent<LineRenderer>();
         if (arc.enabled == true) arc.enabled = false;
-        gravity = Mathf.Abs (Physics.gravity.y);
+        _gravity = Mathf.Abs (Physics.gravity.y);
 
        
     }
@@ -37,13 +37,13 @@ public class ArcRendeer : MonoBehaviour
         
         if (arc.enabled == true)
         {
-            velocity = .05f * Mathf.Abs(Input.mousePosition.y - mouseOnLeftClickPostion.y);
+            velocity = .05f * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
             print(velocity);
         }
         if (Input.GetMouseButtonDown(0))
         {
             if (arc.enabled == false) arc.enabled = true;
-            mouseOnLeftClickPostion = Input.mousePosition;
+            _mouseOnLeftClickPostion = Input.mousePosition;
             
         }
         if (Input.GetMouseButton(0))
@@ -68,8 +68,8 @@ public class ArcRendeer : MonoBehaviour
     Vector3[] CalculateArcArray()
     {
         Vector3[] arcArray = new Vector3[resolution + 1];
-        radianAngle = Mathf.Deg2Rad * angle;
-        float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / gravity;
+        _radianAngle = Mathf.Deg2Rad * angle;
+        float maxDistance = (velocity * velocity * Mathf.Sin(2 * _radianAngle)) / _gravity;
         for(int i = 0; i <= resolution; i++)
         {
             float t = (float)i / (float)resolution;
@@ -80,7 +80,7 @@ public class ArcRendeer : MonoBehaviour
     Vector3 CaluclateArcPoint(float t, float maxDistance)
     {
         float x = t * maxDistance;
-        float y = x * Mathf.Tan(radianAngle) - ((gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
+        float y = x * Mathf.Tan(_radianAngle) - ((_gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(_radianAngle) * Mathf.Cos(_radianAngle)));
         return new Vector3(x, y);
     }
 
