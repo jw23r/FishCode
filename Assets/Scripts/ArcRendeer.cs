@@ -38,7 +38,7 @@ public class ArcRendeer : MonoBehaviour
         if (arc.enabled == true)
         {
             velocity = .05f * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
-            print(velocity);
+
         }
         if (Input.GetMouseButtonDown(0))
         {

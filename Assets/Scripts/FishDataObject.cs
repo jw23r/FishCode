@@ -14,14 +14,27 @@ public class FishDataObject : SingletonScriptableObject<FishDataObject>
     //[SerializeField]
     //private int _coolIntField = 0;
     #endregion Properties (end)
-
-    public List<BodyOfWaterType> BodyOfWaterType = new List<BodyOfWaterType>();
-    public List<TimeOfDay> TimeOfDay = new List<TimeOfDay>();
-    public List<ToolRequired> ToolRequired = new List<ToolRequired>();
-    public List<CastingRange> CastingRange = new List<CastingRange>();
-    public List<Attractant> Attractant = new List<Attractant>();
-    public List<EnticeMethod> EnticeMethod = new List<EnticeMethod>();
-    public List<RetrievalMethod> RetrievalMethod = new List<RetrievalMethod>();
+    public List<BodyOfWaterType> BodyOfWaterType { get { return _bodyOfWaterType; } }
+    [SerializeField]
+    private List<BodyOfWaterType> _bodyOfWaterType = new List<BodyOfWaterType>();
+    public List<TimeOfDay> TimeOfDay { get { return _timeOfDay; } }
+    [SerializeField]
+    private List<TimeOfDay> _timeOfDay = new List<TimeOfDay>();
+    public List<ToolRequired> ToolRequired { get { return _toolRequired; } }
+    [SerializeField]
+    private List<ToolRequired> _toolRequired = new List<ToolRequired>();
+    public List<CastingRange> CastingRange { get { return _castingRange; } }
+    [SerializeField]
+    private List<CastingRange> _castingRange = new List<CastingRange>();
+    public List<Attractant> Attractant { get { return _attractant; } }
+    [SerializeField]
+    private List<Attractant> _attractant = new List<Attractant>();
+    public List<EnticeMethod> EnticeMethod { get { return _enticeMethod; } }
+    [SerializeField]
+    private List<EnticeMethod> _enticeMethod = new List<EnticeMethod>();
+    public List<RetrievalMethod> RetrievalMethod { get { return _retrievalMethod; } }
+    [SerializeField]
+    private List<RetrievalMethod> _retrievalMethod = new List<RetrievalMethod>();
     ScriptableObject water;
 
     private void OnValidate()
