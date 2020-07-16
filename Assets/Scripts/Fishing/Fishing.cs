@@ -6,12 +6,61 @@ using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 
+
+
+/// <summary>
+/// Monobehaviour singleton that will auto-generate an instance if one does not exist.
+/// </summary>
 public class Fishing : MonoBehaviour
 {
+    #region Properties
+    /// <summary>
+    /// Public singleton reference that can be accessed externally.
+    /// </summary>
+    static public Fishing Instance
+    {
+        get
+        {
+            // If we don't have a singleton instance, then automatically create one now:
+            if (_instance == null) _instance = new GameObject("Monohehaviour Singleton (Auto Generating)").AddComponent<Fishing>();
+            return _instance;
+        }
+    }
+
+    /// <summary>
+    /// Static private reference to our singleton instance.
+    /// </summary>
+    static private Fishing _instance = null;
+    #endregion Properties (end)
+
+    #region Initialization	
+    private void Awake()
+    {
+        // Make sure we will only ever have one of these objects:
+        if (_instance == null) _instance = this;
+        else Destroy(this);
+    }
+    #endregion Initialization (end)
+
+    public void LogSomeStuff()
+    {
+        Debug.Log("MonohehaviourSingletonAutoGenerating is logging some stuff!");
+    }
+
+    #region On Destroy
+    private void OnDestroy()
+    {
+        // If we were the singleton, then clear the reference as we are being destroyed:
+        if (_instance == this) _instance = null;
+    }
+    #endregion On Destroy (end)
+
+
+
     public FishDataCollection fish;
     List<FishDataObject> catchable = new List<FishDataObject>();
     string fishDataCollectionAttraction;
-   
+
     string fishDataCollectionTimeOfDay;
     string fishDataCollectionToolRequiredy;
     string fishDataCollectionEnticeMethod;
@@ -69,7 +118,7 @@ public class Fishing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
         // print(catchable[0]);
         DropDownOptions();
 
@@ -80,12 +129,12 @@ public class Fishing : MonoBehaviour
     void Update()
     {
         //print(fish.FishDataObjects[0].BodyOfWaterType[BodyOfWaterTypeOptions.value].instanceOfEnum);
-     //   print((BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value);
+        //   print((BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value);
 
         //print(fish.FishDataObjects[0].BodyOfWaterType[0].instanceOfEnum);
         //  print(attractantOptions.value);
 
-        
+
 
         //print(currentFishAttraction);
 
@@ -96,9 +145,9 @@ public class Fishing : MonoBehaviour
         // SetCurrentFishingMethdod();
     }
 
-  public void CastAndFish()
+    public void CastAndFish()
     {
-        if(currentFishBodyOfWaterType == "nothing")
+        if (currentFishBodyOfWaterType == "nothing")
         {
             print("cant fish here");
             return;
@@ -109,16 +158,16 @@ public class Fishing : MonoBehaviour
 
         }
 
-        for (int j = catchable.Count -1; j >= 0; j--)
+        for (int j = catchable.Count - 1; j >= 0; j--)
         {
-          string waterType =  catchable[j].BodyOfWaterType[0].instanceOfEnum.ToString();
+            string waterType = catchable[j].BodyOfWaterType[0].instanceOfEnum.ToString();
             //print(j);
-            print(catchable.Count);
+           // print(catchable.Count);
             if (waterType != currentFishBodyOfWaterType &&
                 catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.Any &&
                 catchable[j].BodyOfWaterType[0].instanceOfEnum != BodyOfWaterType.bodyOfWaterType.None)
             {
-             //   print("removing1");
+                //   print("removing1");
                 catchable.RemoveAt(j);
                 continue;
             }
@@ -127,7 +176,7 @@ public class Fishing : MonoBehaviour
                 catchable[j].Attractant[0].instanceOfEnum != Attractant.attractant.Any &&
                 catchable[j].Attractant[0].instanceOfEnum != Attractant.attractant.None)
             {
-              //  print("removing2");
+                //  print("removing2");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -165,7 +214,7 @@ public class Fishing : MonoBehaviour
         catchable[j].TimeOfDay[0].instanceOfEnum != TimeOfDay.timeOfDay.Any)
 
             {
-             //   print("removing6");
+                //   print("removing6");
 
                 catchable.RemoveAt(j);
                 continue;
@@ -175,20 +224,20 @@ public class Fishing : MonoBehaviour
               catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.Any &&
               catchable[j].ToolRequired[0].instanceOfEnum != ToolRequired.toolRequired.None)
             {
-               // print("removing7");
+                // print("removing7");
 
                 catchable.RemoveAt(j);
                 continue;
 
             }
         }
-            if(catchable.Count > 0)
-            {
-                int i = Random.Range(0, catchable.Count);
+        if (catchable.Count > 0)
+        {
+            int i = Random.Range(0, catchable.Count);
             print("You caught A" + catchable[i].FishNameTextField);
             catchable.Clear();
-            }
-    
+        }
+
 
 
         /*
