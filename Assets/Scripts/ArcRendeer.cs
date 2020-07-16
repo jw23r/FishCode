@@ -5,15 +5,52 @@ using UnityEngine;
 public class ArcRendeer : MonoBehaviour
 {
     LineRenderer arc;
+ 
+
+ 
     public float velocity;
     public float angle;
     public int resolution = 10;
     private float _gravity;
     private float _radianAngle;
+  
+
    
   private  Vector3 _mouseOnLeftClickPostion;
 
+    #region Properties
+    /// <summary>
+    /// Static private reference to our singleton instance.
+    /// </summary>
+    static private ArcRendeer _instance = null;
+    #endregion Properties (end)
 
+    #region Initialization	
+    private void Awake()
+    {
+        // Make sure we will only ever have one of these objects:
+        if (_instance == null) _instance = this;
+        else Destroy(this);
+    }
+    #endregion Initialization (end)
+
+    static public void LogSomeStuff()
+    {
+        if (_instance) _instance.LogStuffToConsole();
+        else Debug.LogWarning("Warning! MonobehaviourSingletonTucked.LogSomeStuff was called, but the instance is null!");
+    }
+    private void LogStuffToConsole()
+    {
+        Debug.Log("MonohehaviourSingletonAutoGenerating is logging some stuff!");
+    }
+
+    #region On Destroy
+    private void OnDestroy()
+    {
+        // If we were the singleton, then clear the reference as we are being destroyed:
+        if (_instance == this) _instance = null;
+    }
+    #endregion On Destroy (end)
     void OnValidate()
     {
         if(arc != null && Application.isPlaying)
@@ -25,7 +62,9 @@ public class ArcRendeer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+   
 
+    
         arc =  GetComponent<LineRenderer>();
         if (arc.enabled == true) arc.enabled = false;
         _gravity = Mathf.Abs (Physics.gravity.y);
@@ -34,10 +73,11 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
+        velocity = Mathf.Clamp(velocity, .1f,10000);
         
         if (arc.enabled == true)
         {
-            velocity = .05f * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
+            velocity = 1 + .05f * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
 
         }
         if (Input.GetMouseButtonDown(0))
@@ -46,10 +86,7 @@ public class ArcRendeer : MonoBehaviour
             _mouseOnLeftClickPostion = Input.mousePosition;
             
         }
-        if (Input.GetMouseButton(0))
-        {
-            RenderArc();
-        }
+        RenderArc();
             if (Input.GetMouseButtonUp(0))
         {
             if (arc.enabled == true)
