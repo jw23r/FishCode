@@ -5,18 +5,20 @@ using UnityEngine;
 public class ArcRendeer : MonoBehaviour
 {
     LineRenderer arc;
- 
 
- 
+
+    public GameObject landingZone;
+    public Transform playerPostion;
     public float velocity;
     public float angle;
     public int resolution = 10;
     private float _gravity;
     private float _radianAngle;
-  
+    Vector3 _linePoints;
+    Vector3 _playerLocation;
 
-   
-  private  Vector3 _mouseOnLeftClickPostion;
+
+    private Vector3 _mouseOnLeftClickPostion;
 
     #region Properties
     /// <summary>
@@ -73,15 +75,18 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
+      
+        print(_linePoints);
         velocity = Mathf.Clamp(velocity, .1f,10000);
-        
+       
         if (arc.enabled == true)
         {
             velocity = 1 + .05f * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
-
+            _linePoints = arc.GetPosition(resolution);
         }
         if (Input.GetMouseButtonDown(0))
         {
+            Instantiate()
             if (arc.enabled == false) arc.enabled = true;
             _mouseOnLeftClickPostion = Input.mousePosition;
             
