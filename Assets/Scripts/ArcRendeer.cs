@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArcRendeer : MonoBehaviour
 {
     LineRenderer arc;
 
-
+    public Dropdown optionsDistance;
+    public Dropdown optionsAccuracy;
+    public Slider sizeMultiplier;
+    public float sizes;
     public GameObject landingZone;
     public Transform playerPostion;
     public float velocity;
@@ -64,9 +68,10 @@ public class ArcRendeer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-   
 
-    
+
+        
+
         arc =  GetComponent<LineRenderer>();
         if (arc.enabled == true) arc.enabled = false;
         _gravity = Mathf.Abs (Physics.gravity.y);
@@ -75,30 +80,104 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
+        CastingOptions();
       
         print(_linePoints);
-        velocity = Mathf.Clamp(velocity, .1f,10000);
+      //  inputfieldTOfloat(sizeMultiplier, sizes);
+        print(sizes);
+        float size = 1 + sizeMultiplier.value * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
+        landingZone.transform.localScale = new Vector3(size, 1, size);
+        velocity = Mathf.Clamp(velocity, .1f, 10000);
        
+        RenderArc();
+        /*   if (Input.GetMouseButtonUp(0))
+       {
+           if (landingZone.activeSelf == true) landingZone.SetActive(false);
+
+           //  Instantiate(landingZone, playerPostion.position + playerPostion.forward + _linePoints, playerPostion.rotation);
+           if (arc.enabled == true)
+           {
+               arc.enabled = false;
+           }
+       }*/
+
+    }
+    private void inputfieldTOfloat(InputField text, float converter)
+    {
+        converter = float.Parse(text.ToString());
+    }
+    private void CastingOptions()
+    {
+        if (optionsDistance.value == 0)
+        {
+            DistanceCast1();
+        }
+        if (optionsDistance.value == 1)
+        {
+            DistanceCast2();
+        }
+        if (optionsDistance.value == 2)
+        {
+            DistanceCast3();
+        }
+        if (optionsAccuracy.value == 0)
+        {
+            Accuracy1();
+        }
+        if (optionsAccuracy.value == 1)
+        {
+            Accuracy2();
+        }
+        if (optionsAccuracy.value == 2)
+        {
+            Accuracy3();
+        }
+        if (optionsAccuracy.value == 3)
+        {
+            Accuracy4();
+        }
+    }
+
+    void DistanceCast1()
+    {
         if (arc.enabled == true)
         {
             velocity = 1 + .05f * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
-            _linePoints = arc.GetPosition(resolution);
+            _linePoints = arc.GetPosition(resolution) + new Vector3(0, 0, 0); ;
+            landingZone.transform.localPosition = _linePoints;
         }
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate()
+
+            if (landingZone.activeSelf == false) landingZone.SetActive(true);
+            landingZone.SetActive(true);
             if (arc.enabled == false) arc.enabled = true;
             _mouseOnLeftClickPostion = Input.mousePosition;
-            
+
         }
-        RenderArc();
-            if (Input.GetMouseButtonUp(0))
-        {
-            if (arc.enabled == true)
-            {
-                arc.enabled = false;
-            }
-        }
+    }
+    void DistanceCast2()
+    {
+
+    }
+    void DistanceCast3()
+    {
+
+    }
+    void Accuracy1()
+    {
+
+    }
+    void Accuracy2()
+    {
+
+    }
+    void Accuracy3()
+    {
+
+    }
+    void Accuracy4()
+    {
 
     }
     // Update is called once per frame
