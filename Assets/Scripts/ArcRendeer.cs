@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class ArcRendeer : MonoBehaviour
 {
     LineRenderer arc;
+   public LineRenderer line;
+
     public GameObject menue;
+   public GameObject bober;
     public GameObject d1;
     public GameObject d2;
     public GameObject d3;
@@ -103,14 +106,15 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
+        CastLine();
         EnableArc();
-
+       BoberMovment();
         CastingOptions();
 
-//print(_linePoints);
+        //print(_linePoints);
         //  inputfieldTOfloat(sizeMultiplier, sizes);
-       // print(sizes);
-      
+        // print(sizes);
+
         velocity = Mathf.Clamp(velocity, .1f, 10000);
 
         RenderArc();
@@ -125,6 +129,27 @@ public class ArcRendeer : MonoBehaviour
            }
        }*/
 
+    }
+
+    private void BoberMovment()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            bober.transform.position = line.GetPosition(0);
+        }
+        if (!Input.GetMouseButton(0))
+        {
+            if (bober.transform.position != line.GetPosition(1))
+            {
+                bober.transform.position = Vector3.MoveTowards(line.GetPosition(1), line.GetPosition(0), .1f * Time.deltaTime);
+            }
+            }
+    }
+
+    private void CastLine()
+    {
+        line.SetPosition(0, playerPostion.position);
+        line.SetPosition(1, landingZone.transform.position);
     }
 
     private void EnableArc()
@@ -319,6 +344,8 @@ public class ArcRendeer : MonoBehaviour
     }
     void Accuracy1()
     {
+       
+
 
     }
     void Accuracy2()
