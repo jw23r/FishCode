@@ -149,7 +149,7 @@ public class Fishing : MonoBehaviour
     {
         if (currentFishBodyOfWaterType == "nothing")
         {
-            print("cant fish here");
+           // print("cant fish here");
             return;
         }
         for (int i = 0; i < fish.FishDataObjects.Count; i++)

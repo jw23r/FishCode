@@ -34,11 +34,11 @@ public class PlayerMovment : MonoBehaviour
             Quaternion targetRot = Quaternion.Euler(0, theCam.yaw, 0);
             transform.rotation = AnimiMath.Dampen(transform.rotation, targetRot, .01f);
         }
-        if (!Input.GetMouseButton(0))
+      /*  if (!Input.GetMouseButton(0))
         {
             Vector3 moveDis = transform.forward * v * moveSpeed;
             moveDis += transform.right * h * moveSpeed;
             body.SimpleMove(moveDis);
-        }
+        }*/
         }
 }

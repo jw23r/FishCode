@@ -17,7 +17,7 @@ public class ArcRendeer : MonoBehaviour
     public GameObject A2;
     public GameObject A3;
     public GameObject A4;
-
+    private  float time;
     public GameObject camrea1;
     public GameObject camrea2;
 
@@ -38,15 +38,20 @@ public class ArcRendeer : MonoBehaviour
 
     public float sizes;
     public GameObject landingZone;
+    public GameObject targetLandingZone;
+    public GameObject aim;
+
+
     public Transform playerPostion;
     public float velocity;
     public float angle;
     public int resolution = 10;
     private float _gravity;
     private float _radianAngle;
+   public Rigidbody aimBody;
     Vector3 _linePoints;
     Vector3 _playerLocation;
-
+    Vector3 _noAccurcy;
 
     private Vector3 _mouseOnLeftClickPostion;
 
@@ -106,6 +111,8 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
+        targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x/2.5f, 0.0918246f, landingZone.transform.localScale.z/2.5f);
+        targetLandingZone.transform.position = line.GetPosition(1);
         CastLine();
         EnableArc();
        BoberMovment();
@@ -133,17 +140,23 @@ public class ArcRendeer : MonoBehaviour
 
     private void BoberMovment()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             bober.transform.position = line.GetPosition(0);
         }
-        if (!Input.GetMouseButton(0))
+        float speed = 1 * Time.deltaTime;
+
+      
+        if (!Input.GetMouseButton(0) && optionsAccuracy.value == 3)
         {
-            if (bober.transform.position != line.GetPosition(1))
-            {
-                bober.transform.position = Vector3.MoveTowards(line.GetPosition(1), line.GetPosition(0), .1f * Time.deltaTime);
+            bober.transform.position = Vector3.MoveTowards(bober.transform.position, _noAccurcy, speed);
+           
             }
-            }
+        if (!Input.GetMouseButton(0) && optionsAccuracy.value != 3)
+        {
+            bober.transform.position = Vector3.MoveTowards(bober.transform.position, line.GetPosition(1), speed);
+
+        }
     }
 
     private void CastLine()
@@ -298,14 +311,14 @@ public class ArcRendeer : MonoBehaviour
             _linePoints = arc.GetPosition(resolution) + new Vector3(0, 0, 0); ;
             landingZone.transform.localPosition = _linePoints;
         float size = 1 + sizeMultiplier.value * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
-        landingZone.transform.localScale = new Vector3(size, 1, size);
+        landingZone.transform.localScale = new Vector3(size, 0.0818246f, size);
         }
     }
     void DistanceCast3()
     {
         if (Input.GetKey("w") && powerBar.value < 1 && goingUp == true && Input.GetMouseButton(0) && isReset == true)
         {
-            print("its going up");
+        //    print("its going up");
 
             powerBar.value += powerBarSpeed;
         }
@@ -315,7 +328,7 @@ public class ArcRendeer : MonoBehaviour
         }
         if (Input.GetKey("w") && goingUp == false && Input.GetMouseButton(0) && isReset == true)
         {
-            print("its going down");
+          //  print("its going down");
 
             powerBar.value -= powerBarSpeed;
         }
@@ -344,21 +357,57 @@ public class ArcRendeer : MonoBehaviour
     }
     void Accuracy1()
     {
-       
+        if (aim.activeSelf == false) aim.SetActive(true);
+        if (aimBody.isKinematic == false) aimBody.isKinematic = true;
 
-
+        //  if (bober.transform.position != line.GetPosition(1))
+        //  {
+        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * 1.1f);
+            aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * 1.1f);
+       // }
+        if (Input.GetMouseButtonDown(0))
+        {
+            aim.transform.parent = landingZone.transform;
+            aim.transform.position = landingZone.transform.position + new Vector3(0,.2f,0);
+          //  aimBody.velocity = new Vector3(0,0,0);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            aimBody.AddForce(Random.Range(-3f, 3), 0, Random.Range(-3f, 3), ForceMode.Impulse);
+        }
     }
     void Accuracy2()
     {
+        if (aim.activeSelf == false) aim.SetActive(true);
+        if (aimBody.isKinematic == false) aimBody.isKinematic = true;
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            aim.transform.parent = bober.transform;
+            aim.transform.position = bober.transform.position;
+        }
     }
     void Accuracy3()
     {
-
+        if (aim.activeSelf == false) aim.SetActive(true);
+       if(aimBody.isKinematic == false) aimBody.isKinematic = true;
+        time += Time.deltaTime;
+        print(time);
+        if(time >= 60 && !Input.GetMouseButton(0))
+;        {
+            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-bober.transform.localScale.x, bober.transform.localScale.x), line.GetPosition(1).y, line.GetPosition(1).z + Random.Range(-bober.transform.localScale.z, bober.transform.localScale.z));
+            time = 0;
+        }
     }
     void Accuracy4()
     {
 
+       if(aim.activeSelf == true) aim.SetActive(false);
+        if (Input.GetMouseButtonUp(0))
+        {
+            _noAccurcy = new Vector3(line.GetPosition(1).x + Random.Range(-bober.transform.localScale.x, bober.transform.localScale.x), line.GetPosition(1).y, line.GetPosition(1).z + Random.Range(-bober.transform.localScale.z, bober.transform.localScale.z));
+         
+        }
     }
     // Update is called once per frame
     void RenderArc()
