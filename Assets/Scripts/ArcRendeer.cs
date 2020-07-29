@@ -386,6 +386,16 @@ public class ArcRendeer : MonoBehaviour
             aim.transform.parent = bober.transform;
             aim.transform.position = bober.transform.position;
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            aim.transform.parent = landingZone.transform;
+            aim.transform.position = landingZone.transform.position + new Vector3(0, .2f, 0);
+            //  aimBody.velocity = new Vector3(0,0,0);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            aimBody.AddForce(Random.Range(-3f, 3), 0, Random.Range(-3f, 3), ForceMode.Impulse);
+        }
     }
     void Accuracy3()
     {
