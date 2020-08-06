@@ -70,7 +70,7 @@ public class Fishing : MonoBehaviour
 
 
 
-
+    static public bool startfish;
 
 
 
@@ -128,6 +128,7 @@ public class Fishing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+ 
         //print(fish.FishDataObjects[0].BodyOfWaterType[BodyOfWaterTypeOptions.value].instanceOfEnum);
         //   print((BodyOfWaterType.bodyOfWaterType)BodyOfWaterTypeOptions.value);
 
@@ -144,12 +145,13 @@ public class Fishing : MonoBehaviour
 
         // SetCurrentFishingMethdod();
     }
-
+  
     public void CastAndFish()
     {
+
         if (currentFishBodyOfWaterType == "nothing")
         {
-           // print("cant fish here");
+            print("cant fish here");
             return;
         }
         for (int i = 0; i < fish.FishDataObjects.Count; i++)
@@ -237,7 +239,12 @@ public class Fishing : MonoBehaviour
             print("You caught A" + catchable[i].FishNameTextField);
             catchable.Clear();
         }
-
+        if (catchable.Count <= 0)
+        {
+            int i = Random.Range(0, catchable.Count);
+            print("You caught  nothing");
+            catchable.Clear();
+        }
 
 
         /*

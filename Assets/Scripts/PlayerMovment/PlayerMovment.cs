@@ -7,7 +7,8 @@ public class PlayerMovment : MonoBehaviour
     
     public float moveSpeed = 5;
     public OrbitCam theCam;
-    public Fishing cast;
+    //public Fishing cast;
+   static public bool fishing = false;
     CharacterController body;
     // Start is called before the first frame update
     void Start()
@@ -19,10 +20,10 @@ public class PlayerMovment : MonoBehaviour
     void Update()
     {
         Moving();
-        if (Input.GetMouseButtonDown(0))
+      /*  if (Input.GetMouseButtonDown(0))
         {
             cast.CastAndFish();
-        }
+        }*/
     }
 
     private void Moving()
@@ -34,11 +35,11 @@ public class PlayerMovment : MonoBehaviour
             Quaternion targetRot = Quaternion.Euler(0, theCam.yaw, 0);
             transform.rotation = AnimiMath.Dampen(transform.rotation, targetRot, .01f);
         }
-      /*  if (!Input.GetMouseButton(0))
+       if (!Input.GetMouseButton(0) && fishing == false )
         {
             Vector3 moveDis = transform.forward * v * moveSpeed;
             moveDis += transform.right * h * moveSpeed;
             body.SimpleMove(moveDis);
-        }*/
+        }
         }
 }

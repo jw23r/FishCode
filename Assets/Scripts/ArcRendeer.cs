@@ -7,7 +7,7 @@ public class ArcRendeer : MonoBehaviour
 {
     LineRenderer arc;
    public LineRenderer line;
-
+    public NewBehaviourScript fish;
     public GameObject menue;
    public GameObject bober;
     public GameObject d1;
@@ -40,7 +40,8 @@ public class ArcRendeer : MonoBehaviour
     public GameObject landingZone;
     public GameObject targetLandingZone;
     public GameObject aim;
-
+    bool entice;
+    public Fishing cast;
 
     public Transform playerPostion;
     public float velocity;
@@ -111,6 +112,7 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
+        
         targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x/2.5f, 0.0918246f, landingZone.transform.localScale.z/2.5f);
         targetLandingZone.transform.position = line.GetPosition(1);
         CastLine();
@@ -142,7 +144,9 @@ public class ArcRendeer : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+           
             bober.transform.position = line.GetPosition(0);
+            entice = true;
         }
         float speed = 1 * Time.deltaTime;
 
@@ -150,15 +154,37 @@ public class ArcRendeer : MonoBehaviour
         if (!Input.GetMouseButton(0) && optionsAccuracy.value == 3)
         {
             bober.transform.position = Vector3.MoveTowards(bober.transform.position, _noAccurcy, speed);
+            if (bober.transform.position == _noAccurcy && entice == true)
+            {
+                EnticeMethdod();
+                Fishing.currentFishBodyOfWaterType = "nothing";
+
            
+
+                entice = false;
             }
-        if (!Input.GetMouseButton(0) && optionsAccuracy.value != 3)
+            }
+        if (!Input.GetMouseButton(0) && optionsAccuracy.value != 3 )
         {
             bober.transform.position = Vector3.MoveTowards(bober.transform.position, line.GetPosition(1), speed);
-
+            if (bober.transform.position == line.GetPosition(1) && entice == true)
+            {
+                EnticeMethdod();
+                Fishing.currentFishBodyOfWaterType = "nothing";
+         
+                entice = false;
+            }
         }
+        
     }
+    private void EnticeMethdod()
+    {
+        print("were enticeing");
+        cast.CastAndFish();
 
+
+
+    }
     private void CastLine()
     {
         line.SetPosition(0, playerPostion.position);
@@ -169,7 +195,10 @@ public class ArcRendeer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            cast.CastAndFish();
 
+            Debug.Log("Were casting");
+            PlayerMovment.fishing = true;
             if (landingZone.activeSelf == false) landingZone.SetActive(true);
          
             if (arc.enabled == false) arc.enabled = true;
@@ -443,5 +472,5 @@ public class ArcRendeer : MonoBehaviour
         float y = x * Mathf.Tan(_radianAngle) - ((_gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(_radianAngle) * Mathf.Cos(_radianAngle)));
         return new Vector3(x, y);
     }
-
+   
 }
