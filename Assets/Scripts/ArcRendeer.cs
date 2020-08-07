@@ -20,8 +20,8 @@ public class ArcRendeer : MonoBehaviour
     private  float time;
     public GameObject camrea1;
     public GameObject camrea2;
-
-
+    bool change = false;
+    bool maxsize;
 
 
     public Scrollbar powerBar;
@@ -157,7 +157,7 @@ public class ArcRendeer : MonoBehaviour
             if (bober.transform.position == _noAccurcy && entice == true)
             {
                 EnticeMethdod();
-                Fishing.currentFishBodyOfWaterType = "nothing";
+   
 
            
 
@@ -170,7 +170,7 @@ public class ArcRendeer : MonoBehaviour
             if (bober.transform.position == line.GetPosition(1) && entice == true)
             {
                 EnticeMethdod();
-                Fishing.currentFishBodyOfWaterType = "nothing";
+                
          
                 entice = false;
             }
@@ -386,29 +386,31 @@ public class ArcRendeer : MonoBehaviour
     }
     void Accuracy1()
     {
-        if (aim.activeSelf == false) aim.SetActive(true);
-        if (aimBody.isKinematic == false) aimBody.isKinematic = true;
-
+       if (aim.activeSelf == false) aim.SetActive(true);
+        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
+        
         //  if (bober.transform.position != line.GetPosition(1))
         //  {
-        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * 1.1f);
-            aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * 1.1f);
+
+        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * -.02f,ForceMode.Impulse);
+            aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * .02f, ForceMode.Impulse);
        // }
         if (Input.GetMouseButtonDown(0))
         {
             aim.transform.parent = landingZone.transform;
-            aim.transform.position = landingZone.transform.position + new Vector3(0,.2f,0);
+            aim.transform.position = landingZone.transform.position + new Vector3(0,.3f,0);
           //  aimBody.velocity = new Vector3(0,0,0);
         }
         if (Input.GetMouseButtonUp(0))
         {
-            aimBody.AddForce(Random.Range(-3f, 3), 0, Random.Range(-3f, 3), ForceMode.Impulse);
+            print("im flying");
+            aimBody.AddForce(Random.Range(-1f, 2), 0, Random.Range(-3f, 3), ForceMode.Impulse);
         }
     }
     void Accuracy2()
     {
         if (aim.activeSelf == false) aim.SetActive(true);
-        if (aimBody.isKinematic == false) aimBody.isKinematic = true;
+        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -429,15 +431,33 @@ public class ArcRendeer : MonoBehaviour
     void Accuracy3()
     {
         if (aim.activeSelf == false) aim.SetActive(true);
-       if(aimBody.isKinematic == false) aimBody.isKinematic = true;
-        time += Time.deltaTime;
+
+      
+            if (aimBody.isKinematic == false) aimBody.isKinematic = true;
+        
+       
+        time -= Time.deltaTime;
         print(time);
-        if(time >= 60 && !Input.GetMouseButton(0))
-;        {
-            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-bober.transform.localScale.x, bober.transform.localScale.x), line.GetPosition(1).y, line.GetPosition(1).z + Random.Range(-bober.transform.localScale.z, bober.transform.localScale.z));
-            time = 0;
+        if (Input.GetMouseButton(0))
+        {
+           float x = 0;
+            x += 1;
+            landingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x + x, landingZone.transform.localScale.y, 0);
         }
-    }
+            if(time <= 0 && Input.GetMouseButton(0))
+        {
+           change = true;
+            time = .5f;
+        }
+        else
+        {
+            change = false;
+        }
+        if (change == true)
+        {
+            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-bober.transform.localScale.x, bober.transform.localScale.x), line.GetPosition(1).y + .15f, line.GetPosition(1).z + Random.Range(-bober.transform.localScale.z, bober.transform.localScale.z));
+        }
+        }
     void Accuracy4()
     {
 
