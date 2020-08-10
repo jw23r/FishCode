@@ -42,7 +42,7 @@ public class ArcRendeer : MonoBehaviour
     public GameObject aim;
     bool entice;
     public Fishing cast;
-
+    public Fish.tool.FishingTool tool;
     public Transform playerPostion;
     public float velocity;
     public float angle;
@@ -119,7 +119,7 @@ public class ArcRendeer : MonoBehaviour
         EnableArc();
        BoberMovment();
         CastingOptions();
-
+       
         //print(_linePoints);
         //  inputfieldTOfloat(sizeMultiplier, sizes);
         // print(sizes);
@@ -195,6 +195,7 @@ public class ArcRendeer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Instantiate(tool.bobber);
             cast.CastAndFish();
 
             Debug.Log("Were casting");

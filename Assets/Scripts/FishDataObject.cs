@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New FishDataObject", menuName = "Fish Data Object")]
-public class FishDataObject : SingletonScriptableObject<FishDataObject>
+public class FishDataObject : ScriptableObject
 {
     #region Properties
     public string FishNameTextField { get { return _fishNameTextField; } } // NOTE: We can protect this data field by only allowing public access to read it but not change it:
