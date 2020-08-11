@@ -16,9 +16,14 @@ namespace Fish.tool
         public GameObject bobber { get { return _bobber; } }
         [SerializeField]
         private GameObject _bobber;
+        public GameObject aim { get { return _aim; } }
+        [SerializeField]
+        private GameObject _aim;
+        public GameObject target { get { return _target; } }
+        [SerializeField]
+        private GameObject _target;
 
-       
-    [System.Serializable]
+        [System.Serializable]
    public enum distanceOptions
     { Distance1, Distance2, Distance3}
 
