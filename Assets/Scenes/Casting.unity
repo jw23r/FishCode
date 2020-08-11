@@ -770,6 +770,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1680006114133502146, guid: 5e7f630f0a3b93b449538cc80d79f3d5,
+        type: 3}
+      propertyPath: m_Name
+      value: LandingZone
+      objectReference: {fileID: 0}
     - target: {fileID: 1680006114133502147, guid: 5e7f630f0a3b93b449538cc80d79f3d5,
         type: 3}
       propertyPath: m_LocalScale.x

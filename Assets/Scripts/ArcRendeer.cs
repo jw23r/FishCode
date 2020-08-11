@@ -10,6 +10,9 @@ public class ArcRendeer : MonoBehaviour
     public NewBehaviourScript fish;
     public GameObject menue;
    public GameObject bober;
+    float x = 1;
+    //Temp not using
+    /*
     public GameObject d1;
     public GameObject d2;
     public GameObject d3;
@@ -17,19 +20,20 @@ public class ArcRendeer : MonoBehaviour
     public GameObject A2;
     public GameObject A3;
     public GameObject A4;
+    */
+    private bool _goingDown = false;
     private  float time;
     public GameObject camrea1;
     public GameObject camrea2;
     bool change = false;
     bool maxsize;
 
-
     public Scrollbar powerBar;
     public float powerBarSpeed;
     bool isReset = true;
     bool goingUp = true;
-    public Dropdown optionsDistance;
-    public Dropdown optionsAccuracy;
+    //public Dropdown optionsDistance;
+   // public Dropdown optionsAccuracy;
     public Slider sizeMultiplier;
     public Slider distance1Multiplier;
     public Slider distance2Multiplier;
@@ -151,7 +155,7 @@ public class ArcRendeer : MonoBehaviour
         float speed = 1 * Time.deltaTime;
 
       
-        if (!Input.GetMouseButton(0) && optionsAccuracy.value == 3)
+        if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() == "Accuracy3")
         {
             bober.transform.position = Vector3.MoveTowards(bober.transform.position, _noAccurcy, speed);
             if (bober.transform.position == _noAccurcy && entice == true)
@@ -164,7 +168,7 @@ public class ArcRendeer : MonoBehaviour
                 entice = false;
             }
             }
-        if (!Input.GetMouseButton(0) && optionsAccuracy.value != 3 )
+        if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() != "Accuracy3")
         {
             bober.transform.position = Vector3.MoveTowards(bober.transform.position, line.GetPosition(1), speed);
             if (bober.transform.position == line.GetPosition(1) && entice == true)
@@ -181,6 +185,8 @@ public class ArcRendeer : MonoBehaviour
     {
         print("were enticeing");
         cast.CastAndFish();
+        PlayerMovment.fishing = false;
+        landingZone.transform.localScale = new Vector3(2.07f, 0.074386f, 2.07f);
 
 
 
@@ -195,7 +201,7 @@ public class ArcRendeer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(tool.bobber);
+            
             cast.CastAndFish();
 
             Debug.Log("Were casting");
@@ -243,82 +249,83 @@ public class ArcRendeer : MonoBehaviour
     private void CastingOptions()
     {
        
-        if (optionsDistance.value == 0)
+        if (tool.instanceOfEnumDistance.ToString() == "Distance1")
         {
+            
             DistanceCast1();
-            if (d1.activeSelf == false) d1.SetActive(true);
+            //if (d1.activeSelf == false) d1.SetActive(true);
         }
         else
         {
-            if (d1.activeSelf == true) d1.SetActive(false);
+            //if (d1.activeSelf == true) d1.SetActive(false);
 
         }
-        if (optionsDistance.value == 1)
+        if (tool.instanceOfEnumDistance.ToString() == "Distance2")
         {
             DistanceCast2();
-            if (d2.activeSelf == false) d2.SetActive(true);
+          //  if (d2.activeSelf == false) d2.SetActive(true);
         }
         else
         {
-            if (d2.activeSelf == true) d2.SetActive(false);
+            //if (d2.activeSelf == true) d2.SetActive(false);
 
         }
-        if (optionsDistance.value == 2)
+        if (tool.instanceOfEnumDistance.ToString() == "Distance3")
         {
             DistanceCast3();
-            if (d3.activeSelf == false) d3.SetActive(true);
+          //  if (d3.activeSelf == false) d3.SetActive(true);
         }
         else
         {
 
-            if (d3.activeSelf == true) d3.SetActive(false);
+           // if (d3.activeSelf == true) d3.SetActive(false);
 
         }
-        if (optionsAccuracy.value == 0)
+        if (tool.instanceOfEnumAccuracy.ToString() ==  "Accuracy1")
         {
             Accuracy1();
-            if (A1.activeSelf == false) A1.SetActive(true);
+           // if (A1.activeSelf == false) A1.SetActive(true);
 
         }
         else
         {
 
-            if (A1.activeSelf == true) A1.SetActive(false);
+            //if (A1.activeSelf == true) A1.SetActive(false);
 
         }
-        if (optionsAccuracy.value == 1)
+        if (tool.instanceOfEnumAccuracy.ToString() == "Accuracy2")
         {
             Accuracy2();
-            if (A2.activeSelf == false) A2.SetActive(true);
+           // if (A2.activeSelf == false) A2.SetActive(true);
 
         }
         else
         {
 
-            if (A2.activeSelf == true) A2.SetActive(false);
+         //   if (A2.activeSelf == true) A2.SetActive(false);
 
         }
-        if (optionsAccuracy.value == 2)
+        if (tool.instanceOfEnumAccuracy.ToString() == "Accuracy3")
         {
             Accuracy3();
-            if (A3.activeSelf == false) A3.SetActive(true);
+            //if (A3.activeSelf == false) A3.SetActive(true);
 
         }
         else
         {
 
-            if (A3.activeSelf == true) A3.SetActive(false);
+           // if (A3.activeSelf == true) A3.SetActive(false);
 
         }
-        if (optionsAccuracy.value == 3)
+        if (tool.instanceOfEnumAccuracy.ToString() == "Accuracy4")
         {
             Accuracy4();
-            if (A4.activeSelf == false) A4.SetActive(true);
+           // if (A4.activeSelf == false) A4.SetActive(true);
         }
         else
         {
 
-            if (A4.activeSelf == true) A4.SetActive(false);
+           // if (A4.activeSelf == true) A4.SetActive(false);
 
         }
     }
@@ -327,7 +334,7 @@ public class ArcRendeer : MonoBehaviour
     {
         if (arc.enabled == true && Input.GetMouseButton(0))
         {
-            velocity = 1 + distance1Multiplier.value * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
+            velocity = 1 + tool.castRangeMultiplier * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
             _linePoints = arc.GetPosition(resolution) + new Vector3(0, 0, 0); ;
             landingZone.transform.localPosition = _linePoints;
         }
@@ -337,10 +344,10 @@ public class ArcRendeer : MonoBehaviour
     {
         if (arc.enabled == true && Input.GetMouseButton(0))
         {
-            velocity = 1 + distance2Multiplier.value * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
+            velocity = 1 + tool.castRangeMultiplier * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
             _linePoints = arc.GetPosition(resolution) + new Vector3(0, 0, 0); ;
             landingZone.transform.localPosition = _linePoints;
-        float size = 1 + sizeMultiplier.value * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
+        float size = 1 + tool.landingZoneMultiplier * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
         landingZone.transform.localScale = new Vector3(size, 0.0818246f, size);
         }
     }
@@ -374,7 +381,7 @@ public class ArcRendeer : MonoBehaviour
         }
         if (arc.enabled == true && isReset == false)
         {
-            velocity = 1 + powerBar.value * distanceMultiplier.value;
+            velocity = 1 + powerBar.value * tool.castRangeMultiplier;
             _linePoints = arc.GetPosition(resolution) + new Vector3(0, 0, 0); ;
             landingZone.transform.localPosition = _linePoints;
         }
@@ -438,14 +445,31 @@ public class ArcRendeer : MonoBehaviour
         
        
         time -= Time.deltaTime;
-        print(time);
-        if (Input.GetMouseButton(0))
+      
+           
+        if (Input.GetMouseButton(0) && _goingDown == false && x < tool.landingZoneMaxSize )
         {
-           float x = 0;
-            x += 1;
-            landingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x + x, landingZone.transform.localScale.y, 0);
+            print("going up");
+            
+            x += tool.landingZoneMultiplier;
+            landingZone.transform.localScale = new Vector3(x, landingZone.transform.localScale.y, x);
         }
-            if(time <= 0 && Input.GetMouseButton(0))
+        if(x >= tool.landingZoneMaxSize)
+        {
+            _goingDown = true;
+        }
+        if (Input.GetMouseButton(0) && _goingDown == true && x > tool.landingZoneMinSize)
+        {
+            print("going down");
+
+            x -= tool.landingZoneMultiplier;
+            landingZone.transform.localScale = new Vector3(x, landingZone.transform.localScale.y, x);
+        }
+        if(x <= tool.landingZoneMinSize)
+        {
+            _goingDown = false;
+        }
+        if (time <= 0 && Input.GetMouseButton(0))
         {
            change = true;
             time = .5f;

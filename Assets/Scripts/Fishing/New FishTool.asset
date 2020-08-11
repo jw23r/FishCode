@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94edd49b5de76f14d885d036f0461a34, type: 3}
   m_Name: New FishTool
   m_EditorClassIdentifier: 
+  _nameOfTool: tool
+  _toolRequired: []
   _maxCastRange: 2
   _minCastRange: 1
+  _castRangeMultiplier: 1
+  _landingZoneMultiplier: 0.1
+  _landingZoneMaxSize: 10
+  _landingZoneMinSize: 1
+  _targetMultiplier: 1
   _bobber: {fileID: 0}
-  instanceOfEnumDistance: 2
-  instanceOfEnumAccuracy: 0
+  _aim: {fileID: 0}
+  _target: {fileID: 0}
+  instanceOfEnumDistance: 0
+  instanceOfEnumAccuracy: 3
