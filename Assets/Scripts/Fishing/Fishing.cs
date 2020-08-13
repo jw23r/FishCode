@@ -239,7 +239,7 @@ public class Fishing : MonoBehaviour
             print("You caught A" + catchable[i].FishNameTextField);
             catchable.Clear();
         }
-        if (catchable.Count <= 0)
+         else
         {
             int i = Random.Range(0, catchable.Count);
             print("You caught  nothing");
