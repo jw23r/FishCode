@@ -184,6 +184,7 @@ public class ArcRendeer : MonoBehaviour
     private void EnticeMethdod()
     {
         print("were enticeing");
+        print("reeling in something");
         cast.CastAndFish();
         PlayerMovment.fishing = false;
         landingZone.transform.localScale = new Vector3(2.07f, 0.074386f, 2.07f);
