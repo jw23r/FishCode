@@ -9,10 +9,10 @@ namespace Fish.tool
         public string nameOfTool { get { return _nameOfTool; } }
         [SerializeField]
         private string _nameOfTool ="tool";
-        public List<ToolRequired> ToolRequired { get { return _toolRequired; } }
+        public float bobberSpeed { get { return _bobberSpeed; } }
         [SerializeField]
-        private List<ToolRequired> _toolRequired = new List<ToolRequired>();
-        // Start is called before the first frame update
+        private float _bobberSpeed = 2;
+     
         public float maxCastRange { get { return _maxCastRange; } }
         [SerializeField]
         private float _maxCastRange = 2;

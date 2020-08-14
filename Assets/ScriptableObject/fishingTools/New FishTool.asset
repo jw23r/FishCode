@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: New FishTool
   m_EditorClassIdentifier: 
   _nameOfTool: tool
-  _toolRequired: []
   _maxCastRange: 2
   _minCastRange: 1
-  _castRangeMultiplier: 1
-  _landingZoneMultiplier: 0.1
+  _castRangeMultiplier: 2
+  _landingZoneMultiplier: 10
   _landingZoneMaxSize: 10
   _landingZoneMinSize: 1
   _targetMultiplier: 1
@@ -25,4 +24,4 @@ MonoBehaviour:
   _aim: {fileID: 6436132560166321669, guid: a1118020f88bbbd43b0f7cd06271143e, type: 3}
   _target: {fileID: 457935576623050795, guid: f39eab273b475a0428ed43785f9066eb, type: 3}
   instanceOfEnumDistance: 0
-  instanceOfEnumAccuracy: 3
+  instanceOfEnumAccuracy: 1

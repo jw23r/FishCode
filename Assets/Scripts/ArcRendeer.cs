@@ -152,7 +152,7 @@ public class ArcRendeer : MonoBehaviour
             bober.transform.position = line.GetPosition(0);
             entice = true;
         }
-        float speed = 1 * Time.deltaTime;
+        float speed = tool.bobberSpeed * Time.deltaTime;
 
       
         if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() == "Accuracy3")
@@ -201,9 +201,9 @@ public class ArcRendeer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            
+            //Instantiate(tool.aim);
             cast.CastAndFish();
-
+            landingZone.transform.localScale = new Vector3(2.07f, 0.074386f, 2.07f);
             Debug.Log("Were casting");
             PlayerMovment.fishing = true;
             if (landingZone.activeSelf == false) landingZone.SetActive(true);
@@ -262,6 +262,7 @@ public class ArcRendeer : MonoBehaviour
         }
         if (tool.instanceOfEnumDistance.ToString() == "Distance2")
         {
+            print("distance2Multiplier working");
             DistanceCast2();
           //  if (d2.activeSelf == false) d2.SetActive(true);
         }
@@ -411,12 +412,14 @@ public class ArcRendeer : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            print("im flying");
+            //print("im flying");
             aimBody.AddForce(Random.Range(-1f, 2), 0, Random.Range(-3f, 3), ForceMode.Impulse);
         }
     }
     void Accuracy2()
     {
+        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * .02f, ForceMode.Impulse);
+        aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * -.02f, ForceMode.Impulse);
         if (aim.activeSelf == false) aim.SetActive(true);
         if (aimBody.isKinematic == true) aimBody.isKinematic = false;
 

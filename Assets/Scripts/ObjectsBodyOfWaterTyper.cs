@@ -16,7 +16,7 @@ public class ObjectsBodyOfWaterTyper : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Player")
+        if(other.transform.tag == "Bobber")
         {
            
             Fishing.currentFishBodyOfWaterType = water;
@@ -26,7 +26,7 @@ public class ObjectsBodyOfWaterTyper : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Bobber")
         {
             Fishing.currentFishBodyOfWaterType = "nothing";
             print("your water is currently " + Fishing.currentFishBodyOfWaterType);
