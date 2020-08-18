@@ -12,7 +12,16 @@ namespace Fish.tool
         public float bobberSpeed { get { return _bobberSpeed; } }
         [SerializeField]
         private float _bobberSpeed = 2;
+        public float powerBarSpeed { get { return _powerBarSpeed; } }
+        [SerializeField]
+        private float _powerBarSpeed = 0.01f;
      
+        public float forceApplied { get { return _forceApplied; } }
+        [SerializeField]
+        private float _forceApplied = 1f;
+        public float bobberMovment { get { return _bobberMovment; } }
+        [SerializeField]
+        private float _bobberMovment = .02f;
         public float maxCastRange { get { return _maxCastRange; } }
         [SerializeField]
         private float _maxCastRange = 2;

@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: New FishTool
   m_EditorClassIdentifier: 
   _nameOfTool: tool
+  _bobberSpeed: 2
+  _powerBarSpeed: 2
+  _forceApplied: 1
+  _bobberMovment: 0.02
   _maxCastRange: 2
   _minCastRange: 1
-  _castRangeMultiplier: 2
+  _castRangeMultiplier: 0.5
   _landingZoneMultiplier: 10
-  _landingZoneMaxSize: 10
-  _landingZoneMinSize: 1
+  _landingZoneMaxSize: 11.85
+  _landingZoneMinSize: 7.21
   _targetMultiplier: 1
   _bobber: {fileID: 5606083328877458897, guid: 79f0f0c85023fd64398c09986b72d9b1, type: 3}
   _aim: {fileID: 6436132560166321669, guid: a1118020f88bbbd43b0f7cd06271143e, type: 3}

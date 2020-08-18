@@ -29,17 +29,18 @@ public class ArcRendeer : MonoBehaviour
     bool maxsize;
 
     public Scrollbar powerBar;
-    public float powerBarSpeed;
+   //public float powerBarSpeed;
     bool isReset = true;
     bool goingUp = true;
+    bool casting = false;
     //public Dropdown optionsDistance;
    // public Dropdown optionsAccuracy;
-    public Slider sizeMultiplier;
+   /* public Slider sizeMultiplier;
     public Slider distance1Multiplier;
     public Slider distance2Multiplier;
 
     public Slider distanceMultiplier;
-
+    */
     public float sizes;
     public GameObject landingZone;
     public GameObject targetLandingZone;
@@ -116,21 +117,11 @@ public class ArcRendeer : MonoBehaviour
     }
     private void Update()
     {
-        
-        targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x/2.5f, 0.0918246f, landingZone.transform.localScale.z/2.5f);
-        targetLandingZone.transform.position = line.GetPosition(1);
-        CastLine();
-        EnableArc();
-       BoberMovment();
-        CastingOptions();
-       
+        StopFishing();
+        Fishhing();
         //print(_linePoints);
         //  inputfieldTOfloat(sizeMultiplier, sizes);
         // print(sizes);
-
-        velocity = Mathf.Clamp(velocity, .1f, 10000);
-
-        RenderArc();
         /*   if (Input.GetMouseButtonUp(0))
        {
            if (landingZone.activeSelf == true) landingZone.SetActive(false);
@@ -143,6 +134,33 @@ public class ArcRendeer : MonoBehaviour
        }*/
 
     }
+
+    private void Fishhing()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            landingZone.SetActive(true);
+            aim.SetActive(true);
+            targetLandingZone.SetActive(true);
+            bober.SetActive(true);
+            arc.enabled = true;
+            casting = true;
+
+        }
+       
+            targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x / 2.5f, 0.0918246f, landingZone.transform.localScale.z / 2.5f);
+            targetLandingZone.transform.position = line.GetPosition(1);
+            CastLine();
+            EnableArc();
+            BoberMovment();
+            CastingOptions();
+
+
+            velocity = Mathf.Clamp(velocity, .1f, 10000);
+
+            RenderArc();
+        
+     }
 
     private void BoberMovment()
     {
@@ -181,14 +199,45 @@ public class ArcRendeer : MonoBehaviour
         }
         
     }
+
+    private void RellingIn()
+    {
+
+        print("reeling in something");
+    }
+    private void Catch()
+    {
+        cast.CastAndFish();
+
+    }
+    private void StopFishing()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            casting = false;
+            landingZone.SetActive(false);
+            aim.SetActive(false);
+            targetLandingZone.SetActive(false);
+            bober.SetActive(false);
+            arc.enabled = false;
+        }
+    }
     private void EnticeMethdod()
     {
-        print("were enticeing");
-        print("reeling in something");
-        cast.CastAndFish();
-        PlayerMovment.fishing = false;
-        landingZone.transform.localScale = new Vector3(2.07f, 0.074386f, 2.07f);
-
+        landingZone.SetActive(false);
+        aim.SetActive(false);
+        targetLandingZone.SetActive(false);
+        bober.SetActive(false);
+        arc.enabled = false;
+        if (casting == true)
+        {
+            print("were enticeing");
+            RellingIn();
+            Catch();
+            PlayerMovment.fishing = false;
+            landingZone.transform.localScale = new Vector3(2.07f, 0.074386f, 2.07f);
+            casting = false;
+        }
 
 
     }
@@ -200,7 +249,7 @@ public class ArcRendeer : MonoBehaviour
 
     private void EnableArc()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && casting == false)
         {
             //Instantiate(tool.aim);
             cast.CastAndFish();
@@ -359,7 +408,7 @@ public class ArcRendeer : MonoBehaviour
         {
         //    print("its going up");
 
-            powerBar.value += powerBarSpeed;
+            powerBar.value += tool.powerBarSpeed;
         }
         if (powerBar.value >= 1)
         {
@@ -369,7 +418,7 @@ public class ArcRendeer : MonoBehaviour
         {
           //  print("its going down");
 
-            powerBar.value -= powerBarSpeed;
+            powerBar.value -= tool.powerBarSpeed;
         }
         if (powerBar.value <= 0 && Input.GetMouseButton(0) && isReset == true)
         {
@@ -419,8 +468,8 @@ public class ArcRendeer : MonoBehaviour
     }
     void Accuracy2()
     {
-        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * .02f, ForceMode.Impulse);
-        aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * -.02f, ForceMode.Impulse);
+        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * tool.forceApplied, ForceMode.Acceleration);
+        aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * -tool.forceApplied, ForceMode.Acceleration);
         if (aim.activeSelf == false) aim.SetActive(true);
         if (aimBody.isKinematic == true) aimBody.isKinematic = false;
 
@@ -437,7 +486,8 @@ public class ArcRendeer : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            aimBody.AddForce(Random.Range(-3f, 3), 0, Random.Range(-3f, 3), ForceMode.Impulse);
+           
+            aimBody.AddForce(Random.Range(-tool.forceApplied, tool.forceApplied), 0, Random.Range(-tool.forceApplied, tool.forceApplied), ForceMode.Impulse);
         }
     }
     void Accuracy3()
