@@ -10221,12 +10221,22 @@ PrefabInstance:
     - target: {fileID: 1051708374666608383, guid: cae2568f8dd5d78458a1b124cfeef0b6,
         type: 3}
       propertyPath: m_TagString
-      value: Bobber
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051708374666608383, guid: cae2568f8dd5d78458a1b124cfeef0b6,
+        type: 3}
+      propertyPath: m_Name
+      value: Timer
       objectReference: {fileID: 0}
     - target: {fileID: 1051708375073435143, guid: cae2568f8dd5d78458a1b124cfeef0b6,
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051708375164564738, guid: cae2568f8dd5d78458a1b124cfeef0b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bobber
       objectReference: {fileID: 0}
     - target: {fileID: 1051708375348822073, guid: cae2568f8dd5d78458a1b124cfeef0b6,
         type: 3}
@@ -10279,6 +10289,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 61ab12eae40a8ce46a343d6c3de196f9,
         type: 2}
+    - target: {fileID: 1051708375348822073, guid: cae2568f8dd5d78458a1b124cfeef0b6,
+        type: 3}
+      propertyPath: velocity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1389476834993033479, guid: cae2568f8dd5d78458a1b124cfeef0b6,
         type: 3}
       propertyPath: m_Name

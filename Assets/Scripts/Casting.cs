@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArcRendeer : MonoBehaviour
+public class Casting : MonoBehaviour
 {
     LineRenderer arc;
    public LineRenderer line;
@@ -49,7 +49,7 @@ public class ArcRendeer : MonoBehaviour
     public Fishing cast;
     public Fish.tool.FishingTool tool;
     public Transform playerPostion;
-    public float velocity;
+    public float velocity = 1;
     public float angle;
     public int resolution = 10;
     private float _gravity;
@@ -65,12 +65,13 @@ public class ArcRendeer : MonoBehaviour
     /// <summary>
     /// Static private reference to our singleton instance.
     /// </summary>
-    static private ArcRendeer _instance = null;
+    static private Casting _instance = null;
     #endregion Properties (end)
 
     #region Initialization	
     private void Awake()
     {
+
         // Make sure we will only ever have one of these objects:
         if (_instance == null) _instance = this;
         else Destroy(this);
@@ -107,16 +108,21 @@ public class ArcRendeer : MonoBehaviour
     {
 
 
-        
 
         arc =  GetComponent<LineRenderer>();
         if (arc.enabled == true) arc.enabled = false;
         _gravity = Mathf.Abs (Physics.gravity.y);
 
+        landingZone.SetActive(false);
+        aim.SetActive(false);
+        targetLandingZone.SetActive(false);
+        bober.SetActive(false);
+        arc.enabled = false;
        
     }
     private void Update()
     {
+        print(PlayerMovment.fishing);
         StopFishing();
         Fishhing();
         //print(_linePoints);
@@ -139,6 +145,7 @@ public class ArcRendeer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            PlayerMovment.fishing = true;
             landingZone.SetActive(true);
             aim.SetActive(true);
             targetLandingZone.SetActive(true);
@@ -148,7 +155,7 @@ public class ArcRendeer : MonoBehaviour
 
         }
        
-            targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x / 2.5f, 0.0918246f, landingZone.transform.localScale.z / 2.5f);
+            targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x / tool.targetMultiplier, 0.0918246f, landingZone.transform.localScale.z / tool.targetMultiplier);
             targetLandingZone.transform.position = line.GetPosition(1);
             CastLine();
             EnableArc();
@@ -156,9 +163,10 @@ public class ArcRendeer : MonoBehaviour
             CastingOptions();
 
 
-            velocity = Mathf.Clamp(velocity, .1f, 10000);
+            velocity = Mathf.Clamp(velocity, tool.minCastRange, tool.maxCastRange);
+       
 
-            RenderArc();
+        RenderArc();
         
      }
 
@@ -170,7 +178,7 @@ public class ArcRendeer : MonoBehaviour
             bober.transform.position = line.GetPosition(0);
             entice = true;
         }
-        float speed = tool.bobberSpeed * Time.deltaTime;
+        float speed = tool.timerSpeed * Time.deltaTime;
 
       
         if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() == "Accuracy3")
@@ -220,10 +228,13 @@ public class ArcRendeer : MonoBehaviour
             targetLandingZone.SetActive(false);
             bober.SetActive(false);
             arc.enabled = false;
+            PlayerMovment.fishing = false;
+
         }
     }
     private void EnticeMethdod()
     {
+            print("were enticeing");
         landingZone.SetActive(false);
         aim.SetActive(false);
         targetLandingZone.SetActive(false);
@@ -231,7 +242,6 @@ public class ArcRendeer : MonoBehaviour
         arc.enabled = false;
         if (casting == true)
         {
-            print("were enticeing");
             RellingIn();
             Catch();
             PlayerMovment.fishing = false;
@@ -255,7 +265,7 @@ public class ArcRendeer : MonoBehaviour
             cast.CastAndFish();
             landingZone.transform.localScale = new Vector3(2.07f, 0.074386f, 2.07f);
             Debug.Log("Were casting");
-            PlayerMovment.fishing = true;
+            
             if (landingZone.activeSelf == false) landingZone.SetActive(true);
          
             if (arc.enabled == false) arc.enabled = true;
@@ -399,7 +409,8 @@ public class ArcRendeer : MonoBehaviour
             _linePoints = arc.GetPosition(resolution) + new Vector3(0, 0, 0); ;
             landingZone.transform.localPosition = _linePoints;
         float size = 1 + tool.landingZoneMultiplier * Mathf.Abs(Input.mousePosition.y - _mouseOnLeftClickPostion.y);
-        landingZone.transform.localScale = new Vector3(size, 0.0818246f, size);
+            size = Mathf.Clamp(size, tool.landingZoneMinSize, tool.landingZoneMaxSize);
+            landingZone.transform.localScale = new Vector3(size, 0.0818246f, size);
         }
     }
     void DistanceCast3()
@@ -506,6 +517,7 @@ public class ArcRendeer : MonoBehaviour
             print("going up");
             
             x += tool.landingZoneMultiplier;
+
             landingZone.transform.localScale = new Vector3(x, landingZone.transform.localScale.y, x);
         }
         if(x >= tool.landingZoneMaxSize)
