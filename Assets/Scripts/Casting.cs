@@ -122,7 +122,7 @@ public class Casting : MonoBehaviour
     }
     private void Update()
     {
-        print(PlayerMovment.fishing);
+        //print(PlayerMovment.fishing);
         StopFishing();
         Fishhing();
         //print(_linePoints);
