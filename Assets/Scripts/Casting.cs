@@ -552,7 +552,7 @@ public class Casting : MonoBehaviour
         }
         if (change == true)
         {
-            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-aim.transform.localScale.x, aim.transform.localScale.x +landingZone.transform.localScale.x), line.GetPosition(1).y + .15f, line.GetPosition(1).z + Random.Range(-aim.transform.localScale.z, aim.transform.localScale.z  +landingZone.transform.localScale.z));
+            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-landingZone.transform.localScale.x/2, + landingZone.transform.localScale.x/2), line.GetPosition(1).y + .15f, line.GetPosition(1).z + Random.Range(-landingZone.transform.localScale.z/2,  landingZone.transform.localScale.z/2));
         }
         if (Input.GetMouseButtonUp(0))
         {
