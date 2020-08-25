@@ -20,12 +20,12 @@ MonoBehaviour:
   _maxCastRange: 20
   _minCastRange: 1
   _castRangeMultiplier: 0.09
-  _landingZoneMultiplier: 10
+  _landingZoneMultiplier: 0.005
   _landingZoneMaxSize: 11.85
-  _landingZoneMinSize: 7.21
-  _targetMultiplier: 2.5
+  _landingZoneMinSize: 1
+  _targetMultiplier: 6.04
   _bobber: {fileID: 5606083328877458897, guid: 79f0f0c85023fd64398c09986b72d9b1, type: 3}
   _aim: {fileID: 6436132560166321669, guid: a1118020f88bbbd43b0f7cd06271143e, type: 3}
   _target: {fileID: 457935576623050795, guid: f39eab273b475a0428ed43785f9066eb, type: 3}
   instanceOfEnumDistance: 0
-  instanceOfEnumAccuracy: 1
+  instanceOfEnumAccuracy: 2

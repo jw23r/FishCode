@@ -7,7 +7,7 @@ public class Casting : MonoBehaviour
 {
     LineRenderer arc;
    public LineRenderer line;
-    public NewBehaviourScript fish;
+    //public NewBehaviourScript fish;
     public GameObject menue;
    public GameObject bober;
     float x = 1;
@@ -21,6 +21,7 @@ public class Casting : MonoBehaviour
     public GameObject A3;
     public GameObject A4;
     */
+  static  public string hitZone;
     private bool _goingDown = false;
     private  float time;
     public GameObject camrea1;
@@ -181,10 +182,11 @@ public class Casting : MonoBehaviour
         float speed = tool.timerSpeed * Time.deltaTime;
 
       
-        if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() == "Accuracy3")
+        if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() == "Accuracy4")
         {
-            bober.transform.position = Vector3.MoveTowards(bober.transform.position, _noAccurcy, speed);
-            if (bober.transform.position == _noAccurcy && entice == true)
+           // print("moving");
+            aim.transform.position = Vector3.MoveTowards(aim.transform.position, _noAccurcy, speed);
+            if (aim.transform.position == _noAccurcy && entice == true)
             {
                 EnticeMethdod();
    
@@ -223,6 +225,7 @@ public class Casting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             casting = false;
+            aimBody.velocity = Vector3.zero;
             landingZone.SetActive(false);
             aim.SetActive(false);
             targetLandingZone.SetActive(false);
@@ -456,8 +459,6 @@ public class Casting : MonoBehaviour
     }
     void Accuracy1()
     {
-       if (aim.activeSelf == false) aim.SetActive(true);
-        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
         
         //  if (bober.transform.position != line.GetPosition(1))
         //  {
@@ -467,6 +468,8 @@ public class Casting : MonoBehaviour
        // }
         if (Input.GetMouseButtonDown(0))
         {
+       if (aim.activeSelf == false) aim.SetActive(true);
+        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
             aim.transform.parent = landingZone.transform;
             aim.transform.position = landingZone.transform.position + new Vector3(0,.3f,0);
           //  aimBody.velocity = new Vector3(0,0,0);
@@ -481,11 +484,11 @@ public class Casting : MonoBehaviour
     {
         aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * tool.forceApplied, ForceMode.Acceleration);
         aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * -tool.forceApplied, ForceMode.Acceleration);
-        if (aim.activeSelf == false) aim.SetActive(true);
-        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
 
         if (Input.GetMouseButtonDown(0))
         {
+        if (aim.activeSelf == false) aim.SetActive(true);
+        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
             aim.transform.parent = bober.transform;
             aim.transform.position = bober.transform.position;
         }
@@ -503,18 +506,21 @@ public class Casting : MonoBehaviour
     }
     void Accuracy3()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
         if (aim.activeSelf == false) aim.SetActive(true);
 
-      
             if (aimBody.isKinematic == false) aimBody.isKinematic = true;
         
+
+        }
        
         time -= Time.deltaTime;
       
            
         if (Input.GetMouseButton(0) && _goingDown == false && x < tool.landingZoneMaxSize )
         {
-            print("going up");
+           // print("going up");
             
             x += tool.landingZoneMultiplier;
 
@@ -526,7 +532,7 @@ public class Casting : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && _goingDown == true && x > tool.landingZoneMinSize)
         {
-            print("going down");
+          //  print("going down");
 
             x -= tool.landingZoneMultiplier;
             landingZone.transform.localScale = new Vector3(x, landingZone.transform.localScale.y, x);
@@ -546,16 +552,34 @@ public class Casting : MonoBehaviour
         }
         if (change == true)
         {
-            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-bober.transform.localScale.x, bober.transform.localScale.x), line.GetPosition(1).y + .15f, line.GetPosition(1).z + Random.Range(-bober.transform.localScale.z, bober.transform.localScale.z));
+            aim.transform.position = new Vector3(line.GetPosition(1).x + Random.Range(-aim.transform.localScale.x, aim.transform.localScale.x +landingZone.transform.localScale.x), line.GetPosition(1).y + .15f, line.GetPosition(1).z + Random.Range(-aim.transform.localScale.z, aim.transform.localScale.z  +landingZone.transform.localScale.z));
         }
-        }
-    void Accuracy4()
-    {
-
-       if(aim.activeSelf == true) aim.SetActive(false);
         if (Input.GetMouseButtonUp(0))
         {
-            _noAccurcy = new Vector3(line.GetPosition(1).x + Random.Range(-bober.transform.localScale.x, bober.transform.localScale.x), line.GetPosition(1).y, line.GetPosition(1).z + Random.Range(-bober.transform.localScale.z, bober.transform.localScale.z));
+            EnticeMethdod();
+        }
+    }
+
+    void Accuracy4()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (aim.activeSelf == false) aim.SetActive(true);
+
+          
+
+
+        }
+        if (Input.GetMouseButton(0))
+        {
+
+            aim.transform.position = line.GetPosition(0);
+            entice = true;
+        }
+        if (bober.activeSelf == true) bober.SetActive(false);
+        if (Input.GetMouseButtonUp(0))
+        {
+            _noAccurcy = new Vector3(line.GetPosition(1).x + Random.Range(-aim.transform.localScale.x, aim.transform.localScale.x), line.GetPosition(1).y, line.GetPosition(1).z + Random.Range(-aim.transform.localScale.z, aim.transform.localScale.z));
          
         }
     }
