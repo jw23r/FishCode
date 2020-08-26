@@ -58,6 +58,11 @@ namespace Fish.tool
         [Tooltip("float that divides the target size by current parent size ")]
 
         private float _targetMultiplier = 2.5f;
+        public float TimeBeforeSwitch { get { return _timeBeforeSwitch; } }
+        [SerializeField]
+        [Tooltip("how long before a new location is chosen ")]
+
+        private float _timeBeforeSwitch = .5f;
         public GameObject bobber { get { return _bobber; } }
         [SerializeField]
         [Tooltip("not being used")]

@@ -8,8 +8,8 @@ public class Casting : MonoBehaviour
     LineRenderer arc;
    public LineRenderer line;
     //public NewBehaviourScript fish;
-    public GameObject menue;
-   public GameObject bober;
+   
+   public GameObject timer;
     float x = 1;
     //Temp not using
     /*
@@ -24,8 +24,7 @@ public class Casting : MonoBehaviour
   static  public string hitZone;
     private bool _goingDown = false;
     private  float time;
-    public GameObject camrea1;
-    public GameObject camrea2;
+   
     bool change = false;
     bool maxsize;
 
@@ -117,7 +116,7 @@ public class Casting : MonoBehaviour
         landingZone.SetActive(false);
         aim.SetActive(false);
         targetLandingZone.SetActive(false);
-        bober.SetActive(false);
+        timer.SetActive(false);
         arc.enabled = false;
        
     }
@@ -148,16 +147,23 @@ public class Casting : MonoBehaviour
         {
             PlayerMovment.fishing = true;
             landingZone.SetActive(true);
-            aim.SetActive(true);
+        
             targetLandingZone.SetActive(true);
-            bober.SetActive(true);
+            timer.SetActive(true);
             arc.enabled = true;
             casting = true;
 
         }
-       
+        if(tool.instanceOfEnumAccuracy.ToString() != "Accuracy2")
+        {
             targetLandingZone.transform.localScale = new Vector3(landingZone.transform.localScale.x / tool.targetMultiplier, 0.0918246f, landingZone.transform.localScale.z / tool.targetMultiplier);
             targetLandingZone.transform.position = line.GetPosition(1);
+        }
+        else
+        {
+            targetLandingZone.transform.localScale = new Vector3(timer.transform.localScale.x / tool.targetMultiplier, 0.0918246f, timer.transform.localScale.z / tool.targetMultiplier);
+            targetLandingZone.transform.position =new Vector3(timer.transform.position.x, timer.transform.position.y + 0.05f, timer.transform.position.z);
+        }
             CastLine();
             EnableArc();
             BoberMovment();
@@ -175,8 +181,8 @@ public class Casting : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-           
-            bober.transform.position = line.GetPosition(0);
+
+            timer.transform.position = line.GetPosition(0);
             entice = true;
         }
         float speed = tool.timerSpeed * Time.deltaTime;
@@ -198,8 +204,8 @@ public class Casting : MonoBehaviour
             }
         if (!Input.GetMouseButton(0) && tool.instanceOfEnumAccuracy.ToString() != "Accuracy3")
         {
-            bober.transform.position = Vector3.MoveTowards(bober.transform.position, line.GetPosition(1), speed);
-            if (bober.transform.position == line.GetPosition(1) && entice == true)
+            timer.transform.position = Vector3.MoveTowards(timer.transform.position, line.GetPosition(1), speed);
+            if (timer.transform.position == line.GetPosition(1) && entice == true)
             {
                 EnticeMethdod();
                 
@@ -229,7 +235,7 @@ public class Casting : MonoBehaviour
             landingZone.SetActive(false);
             aim.SetActive(false);
             targetLandingZone.SetActive(false);
-            bober.SetActive(false);
+            timer.SetActive(false);
             arc.enabled = false;
             PlayerMovment.fishing = false;
 
@@ -237,11 +243,12 @@ public class Casting : MonoBehaviour
     }
     private void EnticeMethdod()
     {
+        print("we hit " + hitZone);
             print("were enticeing");
         landingZone.SetActive(false);
         aim.SetActive(false);
         targetLandingZone.SetActive(false);
-        bober.SetActive(false);
+        timer.SetActive(false);
         arc.enabled = false;
         if (casting == true)
         {
@@ -277,34 +284,7 @@ public class Casting : MonoBehaviour
         }
     }
 
-    public  void OpenMenue()
-    {
-        if (menue.activeSelf == true)
-        {
-            menue.SetActive(false);
-        }
-        else
-        {
-            menue.SetActive(true);
-        }
-    }
-    public void ChangeCamera()
-    {
-        if (camrea1.activeSelf == true)
-        {
-            camrea1.SetActive(false);
-            if (camrea2.activeSelf == false) camrea2.SetActive(true);
-        }
-        else
-        {
-            if (camrea2.activeSelf == true)
-            {
-                camrea2.SetActive(false);
-                if (camrea1.activeSelf == false) camrea1.SetActive(true);
-
-            }
-        }
-    }
+  
     private void inputfieldTOfloat(InputField text, float converter)
     {
         converter = float.Parse(text.ToString());
@@ -459,23 +439,24 @@ public class Casting : MonoBehaviour
     }
     void Accuracy1()
     {
-        
+
         //  if (bober.transform.position != line.GetPosition(1))
         //  {
 
-        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * -.02f,ForceMode.Impulse);
-            aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * .02f, ForceMode.Impulse);
-       // }
+        aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * tool.forceApplied, ForceMode.Acceleration);
+        aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * -tool.forceApplied, ForceMode.Acceleration);
+        // }
         if (Input.GetMouseButtonDown(0))
+        {
+            aimBody.velocity = new Vector3(0,0,0);
+            aim.SetActive(false);
+        }
+        if (Input.GetMouseButtonUp(0))
         {
        if (aim.activeSelf == false) aim.SetActive(true);
         if (aimBody.isKinematic == true) aimBody.isKinematic = false;
             aim.transform.parent = landingZone.transform;
             aim.transform.position = landingZone.transform.position + new Vector3(0,.3f,0);
-          //  aimBody.velocity = new Vector3(0,0,0);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
             //print("im flying");
             aimBody.AddForce(Random.Range(-1f, 2), 0, Random.Range(-3f, 3), ForceMode.Impulse);
         }
@@ -485,22 +466,22 @@ public class Casting : MonoBehaviour
         aimBody.AddForce(Input.GetAxis("Vertical") * transform.right * tool.forceApplied, ForceMode.Acceleration);
         aimBody.AddForce(Input.GetAxis("Horizontal") * transform.forward * -tool.forceApplied, ForceMode.Acceleration);
 
+      
         if (Input.GetMouseButtonDown(0))
+            aimBody.velocity = new Vector3(0,0,0);
         {
-        if (aim.activeSelf == false) aim.SetActive(true);
-        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
-            aim.transform.parent = bober.transform;
-            aim.transform.position = bober.transform.position;
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            aim.transform.parent = landingZone.transform;
-            aim.transform.position = landingZone.transform.position + new Vector3(0, .2f, 0);
+            aim.SetActive(false);
+            aim.transform.parent = timer.transform;
+            aim.transform.position = timer.transform.position + new Vector3(0, .2f, 0);
             //  aimBody.velocity = new Vector3(0,0,0);
         }
         if (Input.GetMouseButtonUp(0))
         {
+        if (aim.activeSelf == false) aim.SetActive(true);
+        if (aimBody.isKinematic == true) aimBody.isKinematic = false;
            
+            aim.transform.parent = timer.transform;
+            aim.transform.position = timer.transform.position;
             aimBody.AddForce(Random.Range(-tool.forceApplied, tool.forceApplied), 0, Random.Range(-tool.forceApplied, tool.forceApplied), ForceMode.Impulse);
         }
     }
@@ -544,7 +525,7 @@ public class Casting : MonoBehaviour
         if (time <= 0 && Input.GetMouseButton(0))
         {
            change = true;
-            time = .5f;
+            time = tool.TimeBeforeSwitch;
         }
         else
         {
@@ -564,9 +545,9 @@ public class Casting : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (aim.activeSelf == false) aim.SetActive(true);
+            aim.SetActive(false);
 
-          
+
 
 
         }
@@ -576,7 +557,7 @@ public class Casting : MonoBehaviour
             aim.transform.position = line.GetPosition(0);
             entice = true;
         }
-        if (bober.activeSelf == true) bober.SetActive(false);
+        if (aim.activeSelf == true) aim.SetActive(false);
         if (Input.GetMouseButtonUp(0))
         {
             _noAccurcy = new Vector3(line.GetPosition(1).x + Random.Range(-aim.transform.localScale.x, aim.transform.localScale.x), line.GetPosition(1).y, line.GetPosition(1).z + Random.Range(-aim.transform.localScale.z, aim.transform.localScale.z));
